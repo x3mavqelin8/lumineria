@@ -70,7 +70,11 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
           .includes(keyword);
 
       const matchesRarity = !rarity || card.rarityCode === rarity;
-      const matchesType = !type || (card.type || "") === type;
+      const matchesType =
+        !type ||
+        (card.type || "") === type ||
+        (card.type || "") === "キュート/クール/セクシー/ポップ" &&
+          ["キュート", "クール", "セクシー", "ポップ"].includes(type);
       const matchesCategory = !category || (card.category || "") === category;
       const matchesBrand = !brand || (card.brand || "") === brand;
       const matchesSeries = !series || card.series === series;

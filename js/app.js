@@ -252,7 +252,7 @@ topHomeButton.addEventListener("click", () => {
 // カードデータを読み込む
 async function loadCards() {
   try {
-    const response = await fetch("data/cards.json");
+    const response = await fetch(`data/cards.json?v=${Date.now()}`, { cache: "no-store" });
 
     if (!response.ok) {
       throw new Error("cards.jsonを読み込めませんでした");
