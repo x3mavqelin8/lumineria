@@ -163,21 +163,20 @@ function renderTradeSection(status, grid) {
 
     imageFrame.appendChild(image);
 
-    // トレード枚数を画像右下に表示
+    // トレード情報を画像右下に表示
     const tradeData = loadTradeData();
     const trade = tradeData[card.id] || {};
 
-    const tradeCount =
-      status === "wanted"
-        ? Number(trade.wantedCount) || 0
-        : Number(trade.outCount) || 0;
+    if (status === "out") {
+      const outCount = Number(trade.outCount) || 0;
 
-    if (tradeCount > 0) {
-      const countBadge = document.createElement("span");
-      countBadge.className = "trade-count-badge";
-      countBadge.textContent = String(tradeCount);
+      if (outCount > 0) {
+        const countBadge = document.createElement("span");
+        countBadge.className = "trade-count-badge";
+        countBadge.textContent = String(outCount);
 
-      imageFrame.appendChild(countBadge);
+        imageFrame.appendChild(countBadge);
+      }
     }
 
     // カード番号・レアリティを上、画像を下に配置

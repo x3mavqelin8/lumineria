@@ -258,24 +258,23 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
 
     ownedControl.append(decrementButton, ownedInput, incrementButton);
 
-    // 求・譲枚数の操作欄
+    // 求・譲の操作欄
     const tradeControl = document.createElement("div");
     tradeControl.className = "trade-control";
 
+    // 求：チェックボックス
     const wantedLabel = document.createElement("label");
     wantedLabel.className = "trade-count";
     wantedLabel.textContent = "求";
 
-    const wantedInput = document.createElement("input");
-    wantedInput.type = "number";
-    wantedInput.min = "0";
-    wantedInput.step = "1";
-    wantedInput.value = "0";
-    wantedInput.setAttribute(
+    const wantedCheck = document.createElement("input");
+    wantedCheck.type = "checkbox";
+    wantedCheck.setAttribute(
       "aria-label",
-      `${card.cardNumber || "カード"}の求める枚数`,
+      `${card.cardNumber || "カード"}を求める`,
     );
 
+    // 譲：枚数入力
     const outLabel = document.createElement("label");
     outLabel.className = "trade-count";
     outLabel.textContent = "譲";
@@ -290,29 +289,25 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
       `${card.cardNumber || "カード"}の譲る枚数`,
     );
 
-    wantedLabel.appendChild(wantedInput);
+    wantedLabel.appendChild(wantedCheck);
     outLabel.appendChild(outInput);
 
     tradeControl.append(wantedLabel, outLabel);
 
+    // 保存済みのトレード情報を反映
     const tradeData = JSON.parse(
       localStorage.getItem("aikatsu-encore-trade") || "{}",
     );
 
     const savedTrade = tradeData[card.id] || {};
 
-    wantedInput.value = Number(savedTrade.wantedCount) || 0;
+    wantedCheck.checked = Number(savedTrade.wantedCount) > 0;
     outInput.value = Number(savedTrade.outCount) || 0;
 
     function updateTradeCount() {
-      const wantedCount = Math.max(
-        0,
-        Math.floor(Number(wantedInput.value) || 0),
-      );
-
+      const wantedCount = wantedCheck.checked ? 1 : 0;
       const outCount = Math.max(0, Math.floor(Number(outInput.value) || 0));
 
-      wantedInput.value = wantedCount;
       outInput.value = outCount;
 
       const updatedTradeData = JSON.parse(
@@ -334,7 +329,7 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
       );
     }
 
-    wantedInput.addEventListener("change", updateTradeCount);
+    wantedCheck.addEventListener("change", updateTradeCount);
     outInput.addEventListener("change", updateTradeCount);
 
     // チェック・カード番号・レアリティを横並びにする
@@ -354,10 +349,10 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
 
     cardElement.append(cardMeta, imageFrame, ownedControl, tradeControl);
 
-    // コーデ表示では所持数操作とレアリティを非表示
     if (viewMode === "coordinate") {
       rarityLabel.style.display = "none";
       ownedControl.style.display = "none";
+      tradeControl.style.display = "none";
     }
 
     return cardElement;
