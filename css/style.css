@@ -69,8 +69,10 @@ header p {
 }
 
 main {
-  width: min(100% - 32px, 1100px);
+  width: calc(100% - 32px);
+  max-width: 1100px;
   margin: 28px auto;
+  min-width: 0;
 }
 
 .summary {
@@ -587,8 +589,7 @@ main {
 }
 
 .view-tab:focus-visible {
-  outline: 2px solid #e9b9d0;
-  outline-offset: 3px;
+  outline: none;
 }
 
 /* hidden属性の要素を確実に非表示にする */
@@ -1259,3 +1260,31 @@ header {
   height: 25px;
   object-fit: contain;
 }
+
+/* ==============================
+   お店画面
+============================== */
+.shop-view{width:100%;max-width:100%;min-width:0;overflow-x:hidden;box-sizing:border-box}
+.shop-controls{width:100%;box-sizing:border-box;max-width:100%;min-width:0;padding:16px;background:#fff7fb;border:1px solid #f3c9dc;border-radius:18px;margin-bottom:16px}
+.shop-action-row{display:flex;width:100%;min-width:0;max-width:100%;gap:10px}
+.shop-mode-button{flex:1 1 0;width:0;min-width:0;padding:12px 8px;border:1px solid #e5c9d8;border-radius:12px;background:#fff;color:#8b6677;font:inherit;font-weight:bold;cursor:pointer;box-sizing:border-box}
+.shop-mode-button.is-active{border-color:#d98bb0;background:#ffeaf4;color:#a34e78;box-shadow:inset 0 0 0 1px #f3bfd5}
+.shop-location-options{display:flex;align-items:center;gap:10px;margin-top:10px;padding:10px 12px;background:#fff;border:1px solid #ead8e2;border-radius:12px;color:#7d5b6e;font-size:13px}
+.shop-location-options label{flex:1}
+.shop-location-options select{width:120px;box-sizing:border-box;padding:8px;border:1px solid #e5c9d8;border-radius:10px;background:#fff;color:#76516a;font:inherit}
+.shop-status{margin:10px 4px;color:#9b6c82;font-size:13px}
+.shop-list{display:grid;gap:10px}
+.shop-card{display:flex;align-items:center;gap:10px;padding:13px;background:#fff;border:1px solid #f0d3e0;border-radius:16px;box-shadow:0 2px 8px rgb(214 109 158 / 7%);box-sizing:border-box;min-width:0}
+.shop-ribbon{flex:0 0 40px;width:40px;height:40px;border:0;border-radius:12px;background:#fff0f7;color:#e76da4;font-size:21px;cursor:pointer}
+.shop-ribbon:not(.is-favorite){filter:grayscale(1);opacity:.45}
+.shop-card-main{flex:1;min-width:0;cursor:pointer}
+.shop-card-main h3{margin:0 0 4px;color:#7d4d67;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shop-card-main p{margin:0;color:#8d7883;font-size:12px;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shop-meta{display:flex;gap:12px;margin-top:6px;color:#a05d7d;font-size:12px}
+.shop-map{flex:0 0 38px;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#fff4fa;text-decoration:none;font-size:19px}
+.shop-empty{padding:24px 16px;text-align:center;background:#fff;border:1px dashed #edcddd;border-radius:16px;color:#9b7286;font-size:13px;line-height:1.7}
+@media (max-width:600px){.shop-location-options select{width:110px}}
+
+.shop-map-container{width:100%;height:320px;margin:0 0 16px;border:1px solid #f0d3e0;border-radius:18px;overflow:hidden;background:#f8f3f6;box-shadow:0 2px 8px rgb(214 109 158 / 7%)}
+.shop-map-container .leaflet-control-attribution{font-size:9px}
+@media (max-width:600px){.shop-map-container{height:280px}}

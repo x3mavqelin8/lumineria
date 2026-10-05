@@ -10,6 +10,7 @@ import {
 
 import { initCardModal } from "./modal.js";
 import { initCardList } from "./cards.js";
+import { initShop, refreshShopMap, getShopStorageKey } from "./shop.js";
 
 const cardGrid = document.getElementById("card-grid");
 const brandFilter = document.getElementById("brand-filter");
@@ -19,6 +20,8 @@ const seriesFilter = document.getElementById("series-filter");
 const collectionTab = document.getElementById("collection-tab");
 const tradeTab = document.getElementById("trade-tab");
 
+const shopTab = document.getElementById("shop-tab");
+const shopView = document.getElementById("shop-view");
 const settingsTab = document.getElementById("settings-tab");
 const settingsView = document.getElementById("settings-view");
 
@@ -176,16 +179,19 @@ function renderTradeCards() {
 function switchView(view) {
   const isCollectionView = view === "collection";
   const isTradeView = view === "trade";
+  const isShopView = view === "shop";
   const isSettingsView = view === "settings";
 
   toolbar.hidden = !isCollectionView;
   filterTopRow.hidden = !isCollectionView;
   cardGrid.hidden = !isCollectionView;
   tradeView.hidden = !isTradeView;
+  shopView.hidden = !isShopView;
   settingsView.hidden = !isSettingsView;
 
   collectionTab.classList.toggle("active", isCollectionView);
   tradeTab.classList.toggle("active", isTradeView);
+  shopTab.classList.toggle("active", isShopView);
   settingsTab.classList.toggle("active", isSettingsView);
 
   collectionTab.querySelector("img").src = isCollectionView
@@ -196,12 +202,25 @@ function switchView(view) {
     ? "icons/tab-trade-active.png"
     : "icons/tab-trade.png";
 
+  shopTab.querySelector("img").src = isShopView
+    ? "icons/tab-shop-active.png"
+    : "icons/tab-shop.png";
+
   settingsTab.querySelector("img").src = isSettingsView
     ? "icons/tab-settings-active.png"
     : "icons/tab-settings.png";
 
   if (isTradeView) {
     renderTradeCards();
+  }
+
+  // お店画面は初期化時にhiddenなので、表示された直後にLeafletのサイズを再計算する
+  if (isShopView) {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        refreshShopMap();
+      });
+    });
   }
 }
 
@@ -211,6 +230,10 @@ collectionTab.addEventListener("click", () => {
 
 tradeTab.addEventListener("click", () => {
   switchView("trade");
+});
+
+shopTab.addEventListener("click", () => {
+  switchView("shop");
 });
 
 settingsTab.addEventListener("click", () => {
@@ -521,6 +544,9 @@ exportTradeButton.addEventListener("click", () => {
   exportTradeImage("both");
 });
 
+// お店データを読み込む
+initShop().catch((error) => console.error("お店データの読み込みに失敗しました:", error));
+
 // カードデータを読み込む
 loadCards();
 
@@ -535,6 +561,7 @@ backupButton.addEventListener("click", () => {
       [OWNED_STORAGE_KEY]: localStorage.getItem(OWNED_STORAGE_KEY),
       [DETAIL_STORAGE_KEY]: localStorage.getItem(DETAIL_STORAGE_KEY),
       [TRADE_STORAGE_KEY]: localStorage.getItem(TRADE_STORAGE_KEY),
+      [getShopStorageKey()]: localStorage.getItem(getShopStorageKey()),
     },
   };
 
@@ -581,7 +608,7 @@ restoreButton.addEventListener("click", async () => {
       return;
     }
 
-    const keys = [OWNED_STORAGE_KEY, DETAIL_STORAGE_KEY, TRADE_STORAGE_KEY];
+    const keys = [OWNED_STORAGE_KEY, DETAIL_STORAGE_KEY, TRADE_STORAGE_KEY, getShopStorageKey()];
 
     for (const key of keys) {
       const value = backup.data[key];
@@ -630,6 +657,7 @@ resetButton.addEventListener("click", async () => {
   localStorage.removeItem(OWNED_STORAGE_KEY);
   localStorage.removeItem(DETAIL_STORAGE_KEY);
   localStorage.removeItem(TRADE_STORAGE_KEY);
+  localStorage.removeItem(getShopStorageKey());
 
   await loadCards();
 

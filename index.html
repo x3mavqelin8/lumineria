@@ -13,6 +13,7 @@
       rel="stylesheet"
     />
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/modal-kawaii.css" />
   </head>
@@ -58,6 +59,10 @@
 
         <button type="button" id="trade-tab" class="view-tab">
           <img src="icons/tab-trade.png" alt="トレード" />
+        </button>
+
+        <button type="button" id="shop-tab" class="view-tab">
+          <img src="icons/tab-shop.png" alt="お店" />
         </button>
 
         <button type="button" id="settings-tab" class="view-tab">
@@ -271,12 +276,34 @@
       </section>
     </div>
 
+    <!-- お店画面 -->
+    <section id="shop-view" class="shop-view" hidden>
+      <div class="shop-controls">
+        <div class="shop-action-row">
+          <button type="button" id="shop-favorite-button" class="shop-mode-button is-active">🎀 お気に入り</button>
+          <button type="button" id="shop-location-button" class="shop-mode-button">📍 現在地から探す</button>
+        </div>
+        <div id="shop-location-options" class="shop-location-options" hidden>
+          <label for="shop-radius">検索範囲</label>
+          <select id="shop-radius">
+            <option value="5">5km以内</option>
+            <option value="10" selected>10km以内</option>
+            <option value="20">20km以内</option>
+            <option value="50">50km以内</option>
+          </select>
+        </div>
+      </div>
+      <p id="shop-status" class="shop-status"></p>
+      <div id="shop-map" class="shop-map-container" aria-label="店舗地図"></div>
+      <section id="shop-list" class="shop-list"></section>
+    </section>
+
     <!-- 設定画面 -->
     <section id="settings-view" class="settings-view" hidden>
 
       <section class="settings-section">
         <h3>バックアップ</h3>
-        <p>所持枚数・カード詳細・トレード設定を保存します。</p>
+        <p>所持枚数・カード詳細・トレード設定・お気に入り店舗・台数を保存します。</p>
 
         <button type="button" id="backup-button">♡ バックアップを保存</button>
       </section>
@@ -294,7 +321,7 @@
       <section class="settings-section">
         <h3>データの初期化</h3>
         <p>
-          所持枚数・カード詳細・トレード設定を削除します。
+          所持枚数・カード詳細・トレード設定・お気に入り店舗・台数を削除します。
           カード一覧や画像データは削除されません。
         </p>
 
@@ -307,5 +334,6 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
     <script type="module" src="js/app.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   </body>
 </html>

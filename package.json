@@ -2,7 +2,8 @@
   "type": "module",
   "scripts": {
     "update": "node tools/update.js",
-    "extract": "node tools/extractCards.js"
+    "extract": "node tools/extractCards.js",
+    "geocode": "node tools/geocodeShops.js"
   },
   "dependencies": {
     "xlsx": "^0.18.5"
