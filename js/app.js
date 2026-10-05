@@ -252,7 +252,9 @@ topHomeButton.addEventListener("click", () => {
 // カードデータを読み込む
 async function loadCards() {
   try {
-    const response = await fetch(`data/cards.json?v=${Date.now()}`, { cache: "no-store" });
+    const response = await fetch(`data/cards.json?v=${Date.now()}`, {
+      cache: "no-store",
+    });
 
     if (!response.ok) {
       throw new Error("cards.jsonを読み込めませんでした");
@@ -306,6 +308,21 @@ async function loadCards() {
       option.textContent = series;
       seriesFilter.appendChild(option);
     });
+
+    // 最新の通常弾をデフォルトにする
+    const numberedSeries = seriesList.filter((series) =>
+      /^\d+弾$/.test(series),
+    );
+
+    if (numberedSeries.length > 0) {
+      const latestSeries = numberedSeries.reduce((latest, current) => {
+        const latestNumber = parseInt(latest.match(/\d+/)[0], 10);
+        const currentNumber = parseInt(current.match(/\d+/)[0], 10);
+        return currentNumber > latestNumber ? current : latest;
+      });
+
+      seriesFilter.value = latestSeries;
+    }
 
     // JSONに記録されている所持枚数を初期値にする
     cards.forEach((card) => {
@@ -545,7 +562,9 @@ exportTradeButton.addEventListener("click", () => {
 });
 
 // お店データを読み込む
-initShop().catch((error) => console.error("お店データの読み込みに失敗しました:", error));
+initShop().catch((error) =>
+  console.error("お店データの読み込みに失敗しました:", error),
+);
 
 // カードデータを読み込む
 loadCards();
@@ -608,7 +627,12 @@ restoreButton.addEventListener("click", async () => {
       return;
     }
 
-    const keys = [OWNED_STORAGE_KEY, DETAIL_STORAGE_KEY, TRADE_STORAGE_KEY, getShopStorageKey()];
+    const keys = [
+      OWNED_STORAGE_KEY,
+      DETAIL_STORAGE_KEY,
+      TRADE_STORAGE_KEY,
+      getShopStorageKey(),
+    ];
 
     for (const key of keys) {
       const value = backup.data[key];
