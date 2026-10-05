@@ -15,8 +15,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 1100,
-    "coordinateName": "オーロラキス"
+    "ap": 1100
   },
   {
     "id": "E1-02",
@@ -34,8 +33,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 1000,
-    "coordinateName": "オーロラキス"
+    "ap": 1000
   },
   {
     "id": "E1-03",
@@ -53,8 +51,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 950,
-    "coordinateName": "オーロラキス"
+    "ap": 950
   },
   {
     "id": "E1-04",
@@ -72,8 +69,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 600,
-    "coordinateName": "オーロラキス"
+    "ap": 600
   },
   {
     "id": "E1-05",
@@ -91,8 +87,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 600,
-    "coordinateName": "アイスブルー"
+    "ap": 600
   },
   {
     "id": "E1-06",
@@ -110,8 +105,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 750,
-    "coordinateName": "アイスブルー"
+    "ap": 750
   },
   {
     "id": "E1-07",
@@ -129,8 +123,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 750,
-    "coordinateName": "アイスブルー"
+    "ap": 750
   },
   {
     "id": "E1-08",
@@ -148,8 +141,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 450,
-    "coordinateName": "アイスブルー"
+    "ap": 450
   },
   {
     "id": "E1-09",
@@ -185,8 +177,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 750,
-    "coordinateName": "ドリーミー"
+    "ap": 750
   },
   {
     "id": "E1-11",
@@ -204,8 +195,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 650,
-    "coordinateName": "ドリーミー"
+    "ap": 650
   },
   {
     "id": "E1-12",
@@ -223,8 +213,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 700,
-    "coordinateName": "ドリーミー"
+    "ap": 700
   },
   {
     "id": "E1-13",
@@ -242,8 +231,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 650,
-    "coordinateName": "チャーミーリボン"
+    "ap": 650
   },
   {
     "id": "E1-14",
@@ -261,8 +249,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 700,
-    "coordinateName": "チャーミーリボン"
+    "ap": 700
   },
   {
     "id": "E1-15",
@@ -280,8 +267,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 750,
-    "coordinateName": "チャーミーリボン"
+    "ap": 750
   },
   {
     "id": "E1-16",
@@ -299,8 +285,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 450,
-    "coordinateName": "チャーミーリボン"
+    "ap": 450
   },
   {
     "id": "E1-17",
@@ -318,8 +303,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 700,
-    "coordinateName": "クリアネスイエロー"
+    "ap": 700
   },
   {
     "id": "E1-18",
@@ -337,8 +321,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 750,
-    "coordinateName": "クリアネスイエロー"
+    "ap": 750
   },
   {
     "id": "E1-19",
@@ -356,8 +339,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 650,
-    "coordinateName": "クリアネスイエロー"
+    "ap": 650
   },
   {
     "id": "E1-20",
@@ -375,8 +357,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 450,
-    "coordinateName": "クリアネスイエロー"
+    "ap": 450
   },
   {
     "id": "E1-21",
@@ -394,8 +375,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 500,
-    "coordinateName": "ピンクステージ"
+    "ap": 500
   },
   {
     "id": "E1-22",
@@ -413,8 +393,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 400,
-    "coordinateName": "ピンクステージ"
+    "ap": 400
   },
   {
     "id": "E1-23",
@@ -432,8 +411,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 350,
-    "coordinateName": "ピンクステージ"
+    "ap": 350
   },
   {
     "id": "E1-24",
@@ -451,8 +429,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 450,
-    "coordinateName": "レモンラベンダー"
+    "ap": 450
   },
   {
     "id": "E1-25",
@@ -470,8 +447,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 450,
-    "coordinateName": "レモンラベンダー"
+    "ap": 450
   },
   {
     "id": "E1-26",
@@ -489,8 +465,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 350,
-    "coordinateName": "レモンラベンダー"
+    "ap": 350
   },
   {
     "id": "E1-27",
@@ -508,8 +483,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 500,
-    "coordinateName": "ピンクブロッサム"
+    "ap": 500
   },
   {
     "id": "E1-28",
@@ -527,8 +501,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 400,
-    "coordinateName": "ピンクブロッサム"
+    "ap": 400
   },
   {
     "id": "E1-29",
@@ -546,8 +519,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 350,
-    "coordinateName": "ピンクブロッサム"
+    "ap": 350
   },
   {
     "id": "E1-30",
@@ -619,8 +591,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 1100,
-    "coordinateName": "天の川コズミック"
+    "ap": 1100
   },
   {
     "id": "E1-34",
@@ -638,8 +609,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 950,
-    "coordinateName": "天の川コズミック"
+    "ap": 950
   },
   {
     "id": "E1-35",
@@ -657,8 +627,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 1000,
-    "coordinateName": "天の川コズミック"
+    "ap": 1000
   },
   {
     "id": "E1-36",
@@ -676,8 +645,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 600,
-    "coordinateName": "天の川コズミック"
+    "ap": 600
   },
   {
     "id": "E1-37",
@@ -713,8 +681,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 700,
-    "coordinateName": "ブラック"
+    "ap": 700
   },
   {
     "id": "E1-39",
@@ -732,8 +699,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 750,
-    "coordinateName": "ブラック"
+    "ap": 750
   },
   {
     "id": "E1-40",
@@ -751,8 +717,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 650,
-    "coordinateName": "ブラック"
+    "ap": 650
   },
   {
     "id": "E1-41",
@@ -770,8 +735,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 400,
-    "coordinateName": "ブルーステージ"
+    "ap": 400
   },
   {
     "id": "E1-42",
@@ -789,8 +753,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 500,
-    "coordinateName": "ブルーステージ"
+    "ap": 500
   },
   {
     "id": "E1-43",
@@ -808,8 +771,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 350,
-    "coordinateName": "ブルーステージ"
+    "ap": 350
   },
   {
     "id": "E1-44",
@@ -827,8 +789,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 400,
-    "coordinateName": "ブラックストライプ"
+    "ap": 400
   },
   {
     "id": "E1-45",
@@ -846,8 +807,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 450,
-    "coordinateName": "ブラックストライプ"
+    "ap": 450
   },
   {
     "id": "E1-46",
@@ -865,8 +825,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 400,
-    "coordinateName": "ブラックストライプ"
+    "ap": 400
   },
   {
     "id": "E1-47",
@@ -884,8 +843,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 400,
-    "coordinateName": "ネイビーブロッサム"
+    "ap": 400
   },
   {
     "id": "E1-48",
@@ -903,8 +861,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 500,
-    "coordinateName": "ネイビーブロッサム"
+    "ap": 500
   },
   {
     "id": "E1-49",
@@ -922,8 +879,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 350,
-    "coordinateName": "ネイビーブロッサム"
+    "ap": 350
   },
   {
     "id": "E1-50",
@@ -959,8 +915,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 2000,
-    "coordinateName": "レジェンダリールージュ"
+    "ap": 2000
   },
   {
     "id": "E1-52",
@@ -978,8 +933,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 1050,
-    "coordinateName": "レジェンダリールージュ"
+    "ap": 1050
   },
   {
     "id": "E1-53",
@@ -997,8 +951,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 1450,
-    "coordinateName": "アゲハレッド"
+    "ap": 1450
   },
   {
     "id": "E1-54",
@@ -1016,8 +969,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 650,
-    "coordinateName": "アゲハレッド"
+    "ap": 650
   },
   {
     "id": "E1-55",
@@ -1035,8 +987,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 1450,
-    "coordinateName": "パープルジュエリー"
+    "ap": 1450
   },
   {
     "id": "E1-56",
@@ -1054,8 +1005,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 650,
-    "coordinateName": "パープルジュエリー"
+    "ap": 650
   },
   {
     "id": "E1-57",
@@ -1073,8 +1023,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 700,
-    "coordinateName": "アゲハロゴ"
+    "ap": 700
   },
   {
     "id": "E1-58",
@@ -1092,8 +1041,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 750,
-    "coordinateName": "アゲハロゴ"
+    "ap": 750
   },
   {
     "id": "E1-59",
@@ -1111,8 +1059,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 450,
-    "coordinateName": "アゲハロゴ"
+    "ap": 450
   },
   {
     "id": "E1-60",
@@ -1130,8 +1077,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 500,
-    "coordinateName": "パープルステージ"
+    "ap": 500
   },
   {
     "id": "E1-61",
@@ -1149,8 +1095,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 350,
-    "coordinateName": "パープルステージ"
+    "ap": 350
   },
   {
     "id": "E1-62",
@@ -1168,8 +1113,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 400,
-    "coordinateName": "パープルステージ"
+    "ap": 400
   },
   {
     "id": "E1-63",
@@ -1187,8 +1131,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 450,
-    "coordinateName": "プッチがら"
+    "ap": 450
   },
   {
     "id": "E1-64",
@@ -1206,8 +1149,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 450,
-    "coordinateName": "プッチがら"
+    "ap": 450
   },
   {
     "id": "E1-65",
@@ -1225,8 +1167,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 400,
-    "coordinateName": "セクシーロゴ"
+    "ap": 400
   },
   {
     "id": "E1-66",
@@ -1244,8 +1185,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 450,
-    "coordinateName": "セクシーロゴ"
+    "ap": 450
   },
   {
     "id": "E1-67",
@@ -1263,8 +1203,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 400,
-    "coordinateName": "セクシーロゴ"
+    "ap": 400
   },
   {
     "id": "E1-68",
@@ -1282,8 +1221,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 500,
-    "coordinateName": "パープルブロッサム"
+    "ap": 500
   },
   {
     "id": "E1-69",
@@ -1301,8 +1239,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 350,
-    "coordinateName": "パープルブロッサム"
+    "ap": 350
   },
   {
     "id": "E1-70",
@@ -1320,8 +1257,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 400,
-    "coordinateName": "パープルブロッサム"
+    "ap": 400
   },
   {
     "id": "E1-71",
@@ -1339,8 +1275,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 1000,
-    "coordinateName": "サンシャインスター"
+    "ap": 1000
   },
   {
     "id": "E1-72",
@@ -1358,8 +1293,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 1100,
-    "coordinateName": "サンシャインスター"
+    "ap": 1100
   },
   {
     "id": "E1-73",
@@ -1377,8 +1311,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 950,
-    "coordinateName": "サンシャインスター"
+    "ap": 950
   },
   {
     "id": "E1-74",
@@ -1396,8 +1329,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 600,
-    "coordinateName": "サンシャインスター"
+    "ap": 600
   },
   {
     "id": "E1-75",
@@ -1415,8 +1347,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 1100,
-    "coordinateName": "サンライズスター"
+    "ap": 1100
   },
   {
     "id": "E1-76",
@@ -1434,8 +1365,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 950,
-    "coordinateName": "サンライズスター"
+    "ap": 950
   },
   {
     "id": "E1-77",
@@ -1453,8 +1383,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 1000,
-    "coordinateName": "サンライズスター"
+    "ap": 1000
   },
   {
     "id": "E1-78",
@@ -1472,8 +1401,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 600,
-    "coordinateName": "サンライズスター"
+    "ap": 600
   },
   {
     "id": "E1-79",
@@ -1491,8 +1419,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 950,
-    "coordinateName": "サンセットスター"
+    "ap": 950
   },
   {
     "id": "E1-80",
@@ -1510,8 +1437,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 1000,
-    "coordinateName": "サンセットスター"
+    "ap": 1000
   },
   {
     "id": "E1-81",
@@ -1529,8 +1455,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 1100,
-    "coordinateName": "サンセットスター"
+    "ap": 1100
   },
   {
     "id": "E1-82",
@@ -1548,8 +1473,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 600,
-    "coordinateName": "サンセットスター"
+    "ap": 600
   },
   {
     "id": "E1-83",
@@ -1567,8 +1491,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 400,
-    "coordinateName": "イエローブロッサム"
+    "ap": 400
   },
   {
     "id": "E1-84",
@@ -1586,8 +1509,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 350,
-    "coordinateName": "イエローブロッサム"
+    "ap": 350
   },
   {
     "id": "E1-85",
@@ -1605,8 +1527,7 @@
     "wanted": false,
     "memo": "",
     "series": "1弾",
-    "ap": 500,
-    "coordinateName": "イエローブロッサム"
+    "ap": 500
   },
   {
     "id": "EP-001",
@@ -1660,8 +1581,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 1450,
-    "coordinateName": "スターライト学園制服"
+    "ap": 1450
   },
   {
     "id": "EP-030",
@@ -1679,8 +1599,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 650,
-    "coordinateName": "スターライト学園制服"
+    "ap": 650
   },
   {
     "id": "EP-037",
@@ -1698,8 +1617,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 850,
-    "coordinateName": "エンブレムつきセーラー"
+    "ap": 850
   },
   {
     "id": "EP-038",
@@ -1717,8 +1635,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 400,
-    "coordinateName": "エンブレムつきセーラー"
+    "ap": 400
   },
   {
     "id": "EP-003",
@@ -1736,8 +1653,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 900,
-    "coordinateName": "エメラルドコクーン"
+    "ap": 900
   },
   {
     "id": "EP-004",
@@ -1755,8 +1671,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 350,
-    "coordinateName": "エメラルドコクーン"
+    "ap": 350
   },
   {
     "id": "EP-005",
@@ -1774,8 +1689,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 350,
-    "coordinateName": "エメラルドコクーン"
+    "ap": 350
   },
   {
     "id": "EP-006",
@@ -1811,8 +1725,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 400,
-    "coordinateName": "ピンクアーガイル"
+    "ap": 400
   },
   {
     "id": "EP-008",
@@ -1830,8 +1743,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 500,
-    "coordinateName": "ピンクアーガイル"
+    "ap": 500
   },
   {
     "id": "EP-009",
@@ -1849,8 +1761,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 350,
-    "coordinateName": "ピンクアーガイル"
+    "ap": 350
   },
   {
     "id": "EP-010",
@@ -1868,8 +1779,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 350,
-    "coordinateName": "ピンクアーガイル"
+    "ap": 350
   },
   {
     "id": "EP-011",
@@ -1887,8 +1797,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 850,
-    "coordinateName": "スターライト学園"
+    "ap": 850
   },
   {
     "id": "EP-012",
@@ -1906,8 +1815,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 850,
-    "coordinateName": "スターライト学園"
+    "ap": 850
   },
   {
     "id": "EP-013",
@@ -1925,8 +1833,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 850,
-    "coordinateName": "スターライト学園"
+    "ap": 850
   },
   {
     "id": "EP-014",
@@ -1944,8 +1851,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 850,
-    "coordinateName": "スターライト学園"
+    "ap": 850
   },
   {
     "id": "EP-015",
@@ -1963,8 +1869,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 400,
-    "coordinateName": "スターライト学園"
+    "ap": 400
   },
   {
     "id": "EP-016",
@@ -2000,8 +1905,7 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 900,
-    "coordinateName": "ピンクの小花柄"
+    "ap": 900
   },
   {
     "id": "EP-018",
@@ -2019,7 +1923,6 @@
     "wanted": false,
     "memo": "",
     "series": "プロモーションカード",
-    "ap": 350,
-    "coordinateName": "ピンクの小花柄"
+    "ap": 350
   }
 ]

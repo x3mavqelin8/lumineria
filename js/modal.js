@@ -30,9 +30,6 @@ const detailAcquisitionText = document.getElementById(
   "detail-acquisition-text",
 );
 
-const tradeOut = document.getElementById("trade-out");
-const tradeWanted = document.getElementById("trade-wanted");
-
 let editingCard = null;
 let showingBack = false;
 
@@ -141,33 +138,6 @@ function renderCard(card, preserveFace = false) {
   detailAcquisition.hidden = card.cardType !== "promo" || !acquisition;
 
   detailAcquisitionText.textContent = acquisition;
-
-  // 保存済みのトレード設定を復元
-  const tradeData = loadTradeData();
-  const tradeStatus = tradeData[card.id]?.tradeStatus || "";
-
-  tradeOut.checked = tradeStatus === "out";
-  tradeWanted.checked = tradeStatus === "wanted";
-
-  updateNavigationButtons();
-}
-
-// ==============================
-// トレード設定を自動保存
-// ==============================
-
-function autoSaveCard() {
-  if (!editingCard) return;
-
-  let tradeStatus = "";
-
-  if (tradeOut.checked) {
-    tradeStatus = "out";
-  } else if (tradeWanted.checked) {
-    tradeStatus = "wanted";
-  }
-
-  saveCardTrade(editingCard.id, tradeStatus);
 }
 
 // ==============================
@@ -175,23 +145,6 @@ function autoSaveCard() {
 // ==============================
 
 export function initCardModal({ onSaved }) {
-  // トレード設定：変更したら自動保存
-  tradeOut.addEventListener("change", () => {
-    if (tradeOut.checked) {
-      tradeWanted.checked = false;
-    }
-
-    autoSaveCard();
-  });
-
-  tradeWanted.addEventListener("change", () => {
-    if (tradeWanted.checked) {
-      tradeOut.checked = false;
-    }
-
-    autoSaveCard();
-  });
-
   // カード詳細を開く
   function openCardModal(card, getVisibleCards) {
     // 現在の絞り込み結果を取得

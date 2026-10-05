@@ -136,6 +136,19 @@ main {
   gap: 16px;
 }
 
+/* コーデ表示：1コーデを横4枚で表示 */
+.coordinate-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.coordinate-row .card-item {
+  min-width: 0;
+}
+
 .card-item {
   position: relative;
   overflow: hidden;
@@ -1106,11 +1119,10 @@ main {
 
   .filter-details > summary {
     min-width: 0;
-    width: 100%;
     padding: 10px 12px;
     font-size: 13px;
+    gap: 8px;
   }
-
   .series-filter-top {
     flex-basis: 112px;
     width: 112px;
@@ -1441,5 +1453,142 @@ header {
 @media (max-width: 600px) {
   .shop-map-container {
     height: 280px;
+  }
+}
+
+/* カード / コーデ切り替えボタン */
+.display-switch {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+/* カード / コーデ表示切り替えボタン */
+.view-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid #edc6da;
+  border-radius: 999px;
+  background: #fff;
+  color: #b85d8a;
+  font-family: "Hachi Maru Pop", cursive;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.view-toggle-btn:hover {
+  background: #fff3f8;
+  border-color: #e5a9c7;
+}
+
+.view-toggle-btn:active {
+  background: #fce8f1;
+  border-color: #e5a9c7;
+}
+
+/* ==========================
+   カードごとの求・譲入力
+========================== */
+
+.trade-control {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.trade-count {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #b85d8a;
+}
+
+.trade-count input {
+  width: 38px;
+  padding: 4px 2px;
+  border: 1px solid #edc6da;
+  border-radius: 8px;
+  background: #fff;
+  color: #555;
+  font-size: 12px;
+  text-align: center;
+}
+
+.trade-count input:focus {
+  outline: 2px solid #f6b8d2;
+  outline-offset: 1px;
+}
+
+/* トレード枚数バッジ */
+.trade-count-badge {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  z-index: 5;
+
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff;
+  color: #b85d8a;
+  border: 2px solid #b85d8a;
+
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+
+  pointer-events: none;
+}
+
+/* カード・コーデ表示切り替えボタン */
+.view-toggle-btn {
+  flex: 0 0 132px;
+  width: 132px;
+  min-width: 132px;
+  min-height: 42px;
+  padding: 10px 12px;
+
+  border: 1px solid #edc6da;
+  border-radius: 999px;
+  background: #fff;
+  color: #b85d8a;
+
+  font-family: "Hachi Maru Pop", cursive;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1.2;
+
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.view-toggle-btn:hover {
+  background: #fff3f8;
+  border-color: #e5a9c7;
+}
+
+@media (max-width: 600px) {
+  .view-toggle-btn {
+    flex-basis: 112px;
+    width: 112px;
+    min-width: 112px;
+    padding: 10px 8px;
+    font-size: 12px;
   }
 }

@@ -150,6 +150,7 @@ for (const row of rows) {
       rarityCode: rarityCode || "",
       rarity: excelRarity,
       name: text(row["カード名"]),
+      coordinateName: text(row["コーデ名"]),
       type: text(row["タイプ"]),
       category: text(row["カテゴリ"]),
       brand: text(row["ブランド"]),
@@ -177,6 +178,7 @@ for (const row of rows) {
   const fields = [
     ["series", "弾数"],
     ["name", "カード名"],
+    ["coordinateName", "コーデ名"],
     ["rarity", "レアリティ"],
     ["type", "タイプ"],
     ["category", "カテゴリ"],

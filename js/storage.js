@@ -111,16 +111,20 @@ export function saveTradeData(tradeData) {
   localStorage.setItem(TRADE_STORAGE_KEY, JSON.stringify(tradeData));
 }
 
-// カード1枚分のトレード設定を保存する
-export function saveCardTrade(cardId, tradeStatus) {
+// カード1枚分のトレード枚数を保存する
+export function saveCardTrade(cardId, wantedCount, outCount) {
   const tradeData = loadTradeData();
 
-  // 未選択なら登録を削除
-  if (!tradeStatus) {
+  const wanted = Math.max(0, Math.floor(Number(wantedCount) || 0));
+  const out = Math.max(0, Math.floor(Number(outCount) || 0));
+
+  // 求・譲どちらも0なら登録を削除
+  if (wanted === 0 && out === 0) {
     delete tradeData[cardId];
   } else {
     tradeData[cardId] = {
-      tradeStatus,
+      wantedCount: wanted,
+      outCount: out,
     };
   }
 
