@@ -25,6 +25,15 @@ const shopView = document.getElementById("shop-view");
 const settingsTab = document.getElementById("settings-tab");
 const settingsView = document.getElementById("settings-view");
 
+const walletView = document.getElementById("wallet-view");
+
+const walletAddButton = document.getElementById("wallet-add-button");
+const walletForm = document.getElementById("wallet-form");
+
+const walletButton = document.getElementById("wallet-button");
+
+const WALLET_STORAGE_KEY = "aikatsu-wallet";
+
 const toolbar = document.querySelector(".toolbar");
 const tradeView = document.getElementById("trade-view");
 
@@ -209,6 +218,7 @@ function switchView(view) {
   const isTradeView = view === "trade";
   const isShopView = view === "shop";
   const isSettingsView = view === "settings";
+  const isWalletView = view === "wallet";
 
   toolbar.hidden = !isCollectionView;
   filterTopRow.hidden = !isCollectionView;
@@ -216,6 +226,7 @@ function switchView(view) {
   tradeView.hidden = !isTradeView;
   shopView.hidden = !isShopView;
   settingsView.hidden = !isSettingsView;
+  walletView.hidden = !isWalletView;
 
   collectionTab.classList.toggle("active", isCollectionView);
   tradeTab.classList.toggle("active", isTradeView);
@@ -267,6 +278,215 @@ shopTab.addEventListener("click", () => {
 settingsTab.addEventListener("click", () => {
   switchView("settings");
 });
+
+walletAddButton.addEventListener("click", () => {
+  walletForm.hidden = false;
+
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+
+  walletDate.value = `${year}-${month}-${day}`;
+});
+
+document
+  .getElementById("wallet-cancel-button")
+  .addEventListener("click", () => {
+    walletForm.hidden = true;
+  });
+
+const walletTypeButtons = document.querySelectorAll(".wallet-type-button");
+
+walletTypeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    walletTypeButtons.forEach((item) => {
+      item.classList.remove("active");
+    });
+
+    button.classList.add("active");
+  });
+});
+
+walletButton.addEventListener("click", () => {
+  switchView("wallet");
+});
+
+const walletSaveButton = document.getElementById("wallet-save-button");
+const walletDate = document.getElementById("wallet-date");
+const walletDescription = document.getElementById("wallet-description");
+const walletAmount = document.getElementById("wallet-amount");
+
+walletSaveButton.addEventListener("click", () => {
+  const date = walletDate.value;
+  const description = walletDescription.value.trim();
+  const amount = Number(walletAmount.value);
+
+  if (!date || !description || !amount) {
+    alert("日付・内容・金額を入力してください。");
+    return;
+  }
+
+  const activeType = document.querySelector(".wallet-type-button.active");
+  const type = activeType?.dataset.type || "expense";
+
+  const item = document.createElement("div");
+  item.className = "wallet-item";
+
+  const dateText = document.createElement("span");
+  dateText.textContent = date.replace(/-/g, "/").slice(5);
+
+  const descriptionText = document.createElement("span");
+  descriptionText.textContent = description;
+
+  const amountText = document.createElement("span");
+  amountText.textContent =
+    type === "income"
+      ? `＋${amount.toLocaleString()}円`
+      : `−${amount.toLocaleString()}円`;
+
+  amountText.className = type === "income" ? "wallet-income" : "wallet-expense";
+
+  const deleteButton = document.createElement("button");
+  deleteButton.type = "button";
+  deleteButton.className = "wallet-delete-button";
+  deleteButton.textContent = "✕";
+
+  deleteButton.addEventListener("click", () => {
+    const walletData = JSON.parse(
+      localStorage.getItem("aikatsu-wallet") || "[]",
+    );
+
+    const updatedWalletData = walletData.filter(
+      (data) => String(data.id) !== String(item.dataset.id),
+    );
+
+    localStorage.setItem("aikatsu-wallet", JSON.stringify(updatedWalletData));
+
+    item.remove();
+    updateWalletTotal();
+  });
+
+  item.append(dateText, descriptionText, amountText, deleteButton);
+
+  const walletData = JSON.parse(localStorage.getItem("aikatsu-wallet") || "[]");
+
+  const walletItemData = {
+    id: Date.now(),
+    date,
+    description,
+    type,
+    amount,
+  };
+
+  walletData.unshift(walletItemData);
+
+  localStorage.setItem("aikatsu-wallet", JSON.stringify(walletData));
+
+  item.dataset.id = walletItemData.id;
+
+  document.querySelector(".wallet-list").prepend(item);
+
+  walletForm.hidden = true;
+
+  walletDate.value = "";
+  walletDescription.value = "";
+  walletAmount.value = "";
+  updateWalletTotal();
+});
+
+function updateWalletTotal() {
+  const walletTotal = document.getElementById("wallet-total");
+  const walletItems = document.querySelectorAll(".wallet-item");
+
+  let total = 0;
+
+  walletItems.forEach((item) => {
+    const amountElement = item.querySelector(".wallet-income, .wallet-expense");
+    const amountText = amountElement.textContent;
+
+    const amount = Number(amountText.replace(/[^\d]/g, ""));
+
+    if (amountText.includes("＋")) {
+      total += amount;
+    } else {
+      total -= amount;
+    }
+  });
+
+  walletTotal.textContent = `${total >= 0 ? "＋" : "−"}${Math.abs(total).toLocaleString()}円`;
+
+  walletTotal.style.color = total >= 0 ? "#d66d9e" : "#c66b98";
+}
+
+function loadWalletData() {
+  const walletData = JSON.parse(localStorage.getItem("aikatsu-wallet") || "[]");
+
+  const walletList = document.querySelector(".wallet-list");
+
+  walletData
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .forEach((data) => {
+      const item = document.createElement("div");
+      item.className = "wallet-item";
+
+      // IDがない古いデータにもIDを付ける
+      if (!data.id) {
+        data.id = Date.now() + Math.random();
+      }
+
+      item.dataset.id = data.id;
+
+      const dateText = document.createElement("span");
+      dateText.textContent = data.date.replace(/-/g, "/").slice(5);
+
+      const descriptionText = document.createElement("span");
+      descriptionText.textContent = data.description;
+
+      const amountText = document.createElement("span");
+      amountText.textContent =
+        data.type === "income"
+          ? `＋${Number(data.amount).toLocaleString()}円`
+          : `−${Number(data.amount).toLocaleString()}円`;
+
+      amountText.className =
+        data.type === "income" ? "wallet-income" : "wallet-expense";
+
+      const deleteButton = document.createElement("button");
+      deleteButton.type = "button";
+      deleteButton.className = "wallet-delete-button";
+      deleteButton.textContent = "✕";
+
+      deleteButton.addEventListener("click", () => {
+        const currentWalletData = JSON.parse(
+          localStorage.getItem("aikatsu-wallet") || "[]",
+        );
+
+        const updatedWalletData = currentWalletData.filter(
+          (itemData) => String(itemData.id) !== String(item.dataset.id),
+        );
+
+        localStorage.setItem(
+          "aikatsu-wallet",
+          JSON.stringify(updatedWalletData),
+        );
+
+        item.remove();
+        updateWalletTotal();
+      });
+
+      item.append(dateText, descriptionText, amountText, deleteButton);
+
+      walletList.appendChild(item);
+    });
+
+  // 古いデータに付けたIDも保存
+  localStorage.setItem("aikatsu-wallet", JSON.stringify(walletData));
+
+  updateWalletTotal();
+}
+
+loadWalletData();
 
 // どの画面からでもホーム（カード一覧）へ戻る
 const topHomeButton = document.getElementById("top-home-button");
@@ -609,6 +829,7 @@ backupButton.addEventListener("click", () => {
       [DETAIL_STORAGE_KEY]: localStorage.getItem(DETAIL_STORAGE_KEY),
       [TRADE_STORAGE_KEY]: localStorage.getItem(TRADE_STORAGE_KEY),
       [getShopStorageKey()]: localStorage.getItem(getShopStorageKey()),
+      [WALLET_STORAGE_KEY]: localStorage.getItem(WALLET_STORAGE_KEY),
     },
   };
 
@@ -660,6 +881,7 @@ restoreButton.addEventListener("click", async () => {
       DETAIL_STORAGE_KEY,
       TRADE_STORAGE_KEY,
       getShopStorageKey(),
+      WALLET_STORAGE_KEY,
     ];
 
     for (const key of keys) {

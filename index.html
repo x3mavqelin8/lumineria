@@ -35,6 +35,10 @@
     <header>
       <h1>アイカツ！アンコール</h1>
       <p>♡ MY CARD COLLECTION ♡</p>
+
+      <button type="button" id="wallet-button" class="wallet-button">
+        <img src="icons/wallet.png" alt="アイカツ収支" />
+      </button>
     </header>
 
     <main>
@@ -337,6 +341,65 @@
 
         <button type="button" id="reset-button">データを初期化</button>
       </section>
+    </section>
+
+    <!-- アイカツ収支画面 -->
+    <section id="wallet-view" class="wallet-view" hidden>
+      <div id="wallet-form" class="wallet-form" hidden>
+        <div class="wallet-form-row">
+          <label for="wallet-date">日付</label>
+          <input type="date" id="wallet-date" />
+        </div>
+
+        <div class="wallet-form-row">
+          <label for="wallet-description">内容</label>
+          <input
+            type="text"
+            id="wallet-description"
+            placeholder="例：1PLAY、カード売却"
+          />
+        </div>
+
+        <div class="wallet-form-row">
+          <label>区分</label>
+          <div class="wallet-type-buttons">
+            <button
+              type="button"
+              class="wallet-type-button active"
+              data-type="expense"
+            >
+              − 支出
+            </button>
+            <button type="button" class="wallet-type-button" data-type="income">
+              ＋ 収入
+            </button>
+          </div>
+        </div>
+
+        <div class="wallet-form-row">
+          <label for="wallet-amount">金額</label>
+          <div class="wallet-amount-input">
+            <input type="number" id="wallet-amount" min="0" placeholder="100" />
+            <span>円</span>
+          </div>
+        </div>
+
+        <div class="wallet-form-actions">
+          <button type="button" id="wallet-cancel-button">キャンセル</button>
+          <button type="button" id="wallet-save-button">登録</button>
+        </div>
+      </div>
+
+      <div class="wallet-summary">
+        <p>10月の収支</p>
+        <strong id="wallet-total">＋0円</strong>
+      </div>
+
+      <button type="button" id="wallet-add-button" class="wallet-add-button">
+        ＋ 収支を登録
+      </button>
+
+      <div class="wallet-list"></div>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>

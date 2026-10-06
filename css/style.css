@@ -36,6 +36,7 @@ body {
 }
 
 header {
+  position: relative;
   padding: 28px 20px;
   text-align: center;
   background: #f6b8d2;
@@ -993,6 +994,108 @@ main {
 }
 
 /* ==========================
+   アイカツ収支
+========================== */
+
+.wallet-view {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.wallet-view > h2 {
+  margin: 0 0 20px;
+  color: #d66d9e;
+  font-size: 22px;
+  text-align: center;
+}
+
+.wallet-summary {
+  margin-bottom: 18px;
+  padding: 24px 20px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #f3d5e3;
+  border-radius: 18px;
+  box-shadow: 0 3px 10px rgb(214 109 158 / 6%);
+}
+
+.wallet-summary p {
+  margin: 0 0 8px;
+  color: #9b788b;
+  font-size: 14px;
+}
+
+.wallet-summary strong {
+  color: #d66d9e;
+  font-family: "Hachi Maru Pop", cursive;
+  font-size: 30px;
+}
+
+.wallet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wallet-item {
+  display: grid;
+  grid-template-columns: 70px 1fr auto 24px;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid #f3d5e3;
+  border-radius: 14px;
+}
+
+.wallet-item span:first-child {
+  color: #9b788b;
+  font-size: 13px;
+}
+
+.wallet-item span:nth-child(2) {
+  color: #76516a;
+  font-size: 14px;
+}
+
+.wallet-expense {
+  color: #c66b98;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.wallet-income {
+  color: #d66d9e;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .wallet-view > h2 {
+    font-size: 20px;
+  }
+
+  .wallet-summary {
+    padding: 20px 16px;
+  }
+
+  .wallet-summary strong {
+    font-size: 26px;
+  }
+
+  .wallet-item {
+    grid-template-columns: 55px 1fr auto 24px;
+    gap: 7px;
+    padding: 12px;
+  }
+
+  .wallet-item span:nth-child(2) {
+    font-size: 13px;
+  }
+}
+
+/* ==========================
    検索・絞り込み＋段数選択
 ========================== */
 .filter-top-row {
@@ -1591,4 +1694,211 @@ header {
     padding: 10px 8px;
     font-size: 12px;
   }
+}
+
+/* ==========================
+   アイカツ収支ボタン
+========================== */
+
+.wallet-button:hover {
+  background: #fff5fa;
+  transform: translateY(-1px);
+}
+
+.wallet-button:active {
+  transform: translateY(0);
+}
+
+.wallet-add-button {
+  display: block;
+  width: min(240px, 85%);
+  margin: 0 auto 18px;
+  padding: 11px 18px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #d66d9e;
+  color: #fff;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: bold;
+
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgb(214 109 158 / 15%);
+  transition: 0.2s ease;
+}
+
+.wallet-add-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.wallet-add-button:active {
+  transform: translateY(0);
+}
+
+.wallet-form {
+  margin-bottom: 20px;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid #f3d5e3;
+  border-radius: 18px;
+  box-shadow: 0 3px 10px rgb(214 109 158 / 6%);
+}
+
+.wallet-form-row {
+  margin-bottom: 14px;
+}
+
+.wallet-form-row label {
+  display: block;
+  margin-bottom: 6px;
+  color: #76516a;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.wallet-form-row input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ead3df;
+  border-radius: 10px;
+  background: #fff;
+  color: #55434e;
+  font: inherit;
+}
+
+.wallet-type-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.wallet-type-button {
+  flex: 1;
+  padding: 9px;
+  border: 1px solid #ead3df;
+  border-radius: 10px;
+  background: #fff;
+  color: #76516a;
+  font: inherit;
+  cursor: pointer;
+}
+
+.wallet-type-button.active {
+  border-color: #d66d9e;
+  background: #fff0f7;
+  color: #d66d9e;
+  font-weight: bold;
+}
+
+.wallet-amount-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wallet-amount-input input {
+  flex: 1;
+}
+
+.wallet-amount-input span {
+  color: #76516a;
+}
+
+.wallet-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.wallet-form-actions button {
+  padding: 9px 18px;
+  border: 1px solid #ead3df;
+  border-radius: 999px;
+  background: #fff;
+  color: #76516a;
+  font: inherit;
+  cursor: pointer;
+}
+
+#wallet-save-button {
+  border-color: #d66d9e;
+  background: #d66d9e;
+  color: #fff;
+}
+
+.wallet-button > img {
+  display: block;
+  flex: 0 0 24px;
+  width: 24px !important;
+  height: 24px !important;
+  object-fit: contain;
+}
+
+.wallet-button {
+  position: absolute;
+  right: 18px;
+  bottom: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+  margin: 0;
+  padding: 0;
+
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.wallet-button > img {
+  display: block;
+  width: 30px !important;
+  height: 30px !important;
+  object-fit: contain;
+}
+
+.wallet-button:hover {
+  background: transparent;
+  transform: translateY(-2px);
+}
+
+.wallet-button:active {
+  transform: translateY(0);
+}
+
+.wallet-delete-button {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid #f3c4d8;
+  border-radius: 50%;
+  background: #fff4f8;
+  color: #d66d9e;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.wallet-delete-button:hover {
+  background: #fce0ec;
+  border-color: #e99abb;
+  transform: scale(1.08);
+}
+
+.wallet-delete-button:active {
+  transform: scale(0.95);
 }
