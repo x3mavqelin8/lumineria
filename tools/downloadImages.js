@@ -39,12 +39,17 @@ async function main() {
 
   for (const card of cards) {
     // カード番号とレアリティコードから画像ファイル名を作る
-    const cardNumber = card.cardNumber || card.id;
+    const cardNumber = String(card.cardNumber || card.id || "").replace(/★$/, "");
     const rarityCode = card.rarityCode || "";
 
-    const imageBase = cardNumber.endsWith(`_${rarityCode}`)
+    let imageBase = cardNumber.endsWith(`_${rarityCode}`)
       ? cardNumber
       : `${cardNumber}_${rarityCode}`;
+
+    // パラレルは公式画像の _p1 / _p1_b 命名を使用
+    if (card.isParallel) {
+      imageBase += "_p1";
+    }
 
     for (const fileSuffix of ["", "_b"]) {
       const fileName = `${imageBase}${fileSuffix}.webp`;

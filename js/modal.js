@@ -76,18 +76,23 @@ function renderCard(card, preserveFace = false) {
   const rarityCode = String(card.rarityCode || "");
 
   // カード番号とレアリティを表示
-  modalCardNumber.textContent = cardNumber;
-  modalCardRarity.textContent = rarityCode;
+  modalCardNumber.textContent = cardNumber.replace(/★$/, "");
+  modalCardRarity.textContent = `${rarityCode}${card.isParallel ? "★" : ""}`;
   modalCardRarity.className = "modal-card-rarity";
 
   if (rarityCode) {
     modalCardRarity.classList.add(`rarity-${rarityCode.toLowerCase()}`);
   }
 
-  const imageBase =
-    rarityCode && !cardNumber.endsWith(`_${rarityCode}`)
-      ? `${cardNumber}_${rarityCode}`
-      : cardNumber;
+  const cleanCardNumber = cardNumber.replace(/★$/, "");
+  let imageBase =
+    rarityCode && !cleanCardNumber.endsWith(`_${rarityCode}`)
+      ? `${cleanCardNumber}_${rarityCode}`
+      : cleanCardNumber;
+
+  if (card.isParallel) {
+    imageBase += "_p1";
+  }
 
   const frontImagePath = `images/${imageBase}.webp`;
   const backImagePath = `images/${imageBase}_b.webp`;
@@ -226,13 +231,19 @@ export function initCardModal({ onSaved }) {
 
     showingBack = !showingBack;
 
-    const cardNumber = String(editingCard.cardNumber || editingCard.id || "");
+    const cardNumber = String(editingCard.cardNumber || editingCard.id || "").replace(/★$/, "");
     const rarityCode = String(editingCard.rarityCode || "");
 
-    const imageBase =
+    let imageBase =
       rarityCode && !cardNumber.endsWith(`_${rarityCode}`)
         ? `${cardNumber}_${rarityCode}`
         : cardNumber;
+
+    // パラレルは公式画像の _p1 / _p1_b 命名を使用
+    if (editingCard.isParallel) {
+      imageBase += "_p1";
+    }
+
     const imagePath = showingBack
       ? `images/${imageBase}_b.webp`
       : `images/${imageBase}.webp`;

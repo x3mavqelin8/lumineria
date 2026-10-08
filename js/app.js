@@ -113,14 +113,13 @@ function renderTradeSection(status, grid) {
     // カード番号・レアリティ
     const number = document.createElement("p");
     number.className = "card-number";
-    number.textContent = (card.cardNumber || "番号不明").replace(
-      /_[A-Z]+$/,
-      "",
-    );
+    number.textContent = String(card.cardNumber || "番号不明")
+      .replace(/★$/, "")
+      .replace(/_[A-Z]+$/, "");
 
     const rarity = document.createElement("p");
     rarity.className = "card-rarity";
-    rarity.textContent = card.rarityCode || "レアリティ不明";
+    rarity.textContent = `${card.rarityCode || "レアリティ不明"}${card.isParallel ? "★" : ""}`;
 
     // カード一覧と同じレイアウト
     const cardMeta = document.createElement("div");
@@ -147,10 +146,15 @@ function renderTradeSection(status, grid) {
     const cardNumber = String(card.cardNumber || card.id || "");
     const rarityCode = String(card.rarityCode || "");
 
-    const imageBase =
-      rarityCode && !cardNumber.endsWith(`_${rarityCode}`)
-        ? `${cardNumber}_${rarityCode}`
-        : cardNumber;
+    const cleanCardNumber = cardNumber.replace(/★$/, "");
+    let imageBase =
+      rarityCode && !cleanCardNumber.endsWith(`_${rarityCode}`)
+        ? `${cleanCardNumber}_${rarityCode}`
+        : cleanCardNumber;
+
+    if (card.isParallel) {
+      imageBase += "_p1";
+    }
 
     image.src = `images/${imageBase}.webp`;
 
@@ -279,8 +283,43 @@ settingsTab.addEventListener("click", () => {
   switchView("settings");
 });
 
+const walletCategoryButtons = document.querySelectorAll(".wallet-category-button");
+const walletDescriptionOther = document.getElementById("wallet-description");
+
+function setWalletCategory(category) {
+  walletCategoryButtons.forEach((button) => {
+    button.classList.toggle("active", button.dataset.category === category);
+  });
+
+  const typeButton = document.querySelector(
+    `.wallet-type-button[data-type="${category === "sale" ? "income" : "expense"}"]`,
+  );
+  if (typeButton) {
+    walletTypeButtons.forEach((item) => item.classList.remove("active"));
+    typeButton.classList.add("active");
+  }
+
+  if (category === "game") {
+    walletDescriptionOther.hidden = true;
+    walletDescriptionOther.value = "";
+  } else if (category === "sale") {
+    walletDescriptionOther.hidden = true;
+    walletDescriptionOther.value = "";
+  } else {
+    walletDescriptionOther.hidden = false;
+    walletDescriptionOther.focus();
+  }
+}
+
+walletCategoryButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    setWalletCategory(button.dataset.category);
+  });
+});
+
 walletAddButton.addEventListener("click", () => {
   walletForm.hidden = false;
+  setWalletCategory("game");
 
   const today = new Date();
   const year = today.getFullYear();
@@ -319,7 +358,13 @@ const walletAmount = document.getElementById("wallet-amount");
 
 walletSaveButton.addEventListener("click", () => {
   const date = walletDate.value;
-  const description = walletDescription.value.trim();
+  const activeCategory = document.querySelector(".wallet-category-button.active")?.dataset.category || "game";
+  const description =
+    activeCategory === "game"
+      ? "ゲームプレイ"
+      : activeCategory === "sale"
+        ? "カード売却"
+        : walletDescription.value.trim();
   const amount = Number(walletAmount.value);
 
   if (!date || !description || !amount) {
@@ -391,7 +436,9 @@ walletSaveButton.addEventListener("click", () => {
 
   walletDate.value = "";
   walletDescription.value = "";
+  walletDescription.hidden = true;
   walletAmount.value = "";
+  setWalletCategory("game");
   updateWalletTotal();
 });
 

@@ -112,6 +112,25 @@
               <option value="シューズ">シューズ</option>
               <option value="アクセサリー">アクセサリー</option>
             </select>
+
+            <div class="card-status-filters" aria-label="カードの所持状態・パラレルで絞り込み">
+              <label class="ownership-filter-label">
+                <input id="owned-only-filter" type="checkbox" />
+                <span>所持のみ</span>
+              </label>
+              <label class="ownership-filter-label">
+                <input id="unowned-only-filter" type="checkbox" />
+                <span>未所持のみ</span>
+              </label>
+              <label class="parallel-filter-label">
+                <input id="parallel-only-filter" type="checkbox" />
+                <span>パラレルのみ</span>
+              </label>
+            </div>
+
+            <button type="button" id="reset-card-filters" class="reset-card-filters">
+              ↻ 検索条件をリセット
+            </button>
           </section>
         </details>
 
@@ -280,6 +299,16 @@
     <!-- お店画面 -->
     <section id="shop-view" class="shop-view" hidden>
       <div class="shop-controls">
+        <div class="shop-search-row">
+          <input
+            type="search"
+            id="shop-search"
+            class="shop-search-input"
+            placeholder="店舗名・住所で検索（例：GiGO）"
+            autocomplete="off"
+            aria-label="店舗を検索"
+          />
+        </div>
         <div class="shop-action-row">
           <button
             type="button"
@@ -352,11 +381,24 @@
         </div>
 
         <div class="wallet-form-row">
-          <label for="wallet-description">内容</label>
+          <label>内容</label>
+          <div class="wallet-category-buttons">
+            <button type="button" class="wallet-category-button active" data-category="game">
+              🎮 ゲーム
+            </button>
+            <button type="button" class="wallet-category-button" data-category="sale">
+              💳 売却
+            </button>
+            <button type="button" class="wallet-category-button" data-category="other">
+              ✨ その他
+            </button>
+          </div>
           <input
             type="text"
             id="wallet-description"
-            placeholder="例：1PLAY、カード売却"
+            placeholder="内容を入力"
+            class="wallet-description-other"
+            hidden
           />
         </div>
 

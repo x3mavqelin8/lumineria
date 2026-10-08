@@ -8,6 +8,10 @@ const rarityFilter = document.getElementById("rarity-filter");
 const typeFilter = document.getElementById("type-filter");
 const categoryFilter = document.getElementById("category-filter");
 const brandFilter = document.getElementById("brand-filter");
+const parallelOnlyFilter = document.getElementById("parallel-only-filter");
+const ownedOnlyFilter = document.getElementById("owned-only-filter");
+const unownedOnlyFilter = document.getElementById("unowned-only-filter");
+const resetCardFilters = document.getElementById("reset-card-filters");
 
 const seriesFilter = document.getElementById("series-filter");
 
@@ -63,6 +67,9 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
     const category = categoryFilter.value;
     const brand = brandFilter.value;
     const series = seriesFilter.value;
+    const parallelOnly = parallelOnlyFilter?.checked || false;
+    const ownedOnly = ownedOnlyFilter?.checked || false;
+    const unownedOnly = unownedOnlyFilter?.checked || false;
 
     return cards.filter((card) => {
       const matchesKeyword =
@@ -82,6 +89,10 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
       const matchesCategory = !category || (card.category || "") === category;
       const matchesBrand = !brand || (card.brand || "") === brand;
       const matchesSeries = !series || card.series === series;
+      const matchesParallel = !parallelOnly || Boolean(card.isParallel);
+      const isOwned = Number(card.ownedCount) > 0;
+      const matchesOwned = !ownedOnly || isOwned;
+      const matchesUnowned = !unownedOnly || !isOwned;
 
       return (
         matchesKeyword &&
@@ -89,7 +100,10 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
         matchesType &&
         matchesCategory &&
         matchesBrand &&
-        matchesSeries
+        matchesSeries &&
+        matchesParallel &&
+        matchesOwned &&
+        matchesUnowned
       );
     });
   }
@@ -147,10 +161,15 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
     const cardNumber = String(card.cardNumber || card.id || "");
     const rarityCode = String(card.rarityCode || "");
 
-    const imageBase =
-      rarityCode && !cardNumber.endsWith(`_${rarityCode}`)
-        ? `${cardNumber}_${rarityCode}`
-        : cardNumber;
+    const cleanCardNumber = cardNumber.replace(/★$/, "");
+    let imageBase =
+      rarityCode && !cleanCardNumber.endsWith(`_${rarityCode}`)
+        ? `${cleanCardNumber}_${rarityCode}`
+        : cleanCardNumber;
+
+    if (card.isParallel) {
+      imageBase += "_p1";
+    }
 
     const imageFile = `${imageBase}.webp`;
 
@@ -182,15 +201,14 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
     // カード番号
     const number = document.createElement("p");
     number.className = "card-number";
-    number.textContent = (card.cardNumber || "番号不明").replace(
-      /_[A-Z]+$/,
-      "",
-    );
+    number.textContent = String(card.cardNumber || "番号不明")
+      .replace(/★$/, "")
+      .replace(/_[A-Z]+$/, "");
 
     // レアリティ
     const rarityLabel = document.createElement("p");
     rarityLabel.className = "card-rarity";
-    rarityLabel.textContent = card.rarityCode || "レアリティ不明";
+    rarityLabel.textContent = `${card.rarityCode || "レアリティ不明"}${card.isParallel ? "★" : ""}`;
 
     // 所持枚数の操作欄
     const ownedControl = document.createElement("div");
@@ -361,16 +379,14 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
   // カード一覧を表示する
   function renderCards() {
     const filteredCards = getVisibleCards().sort((a, b) => {
-      const numA = parseInt(
-        String(a.cardNumber || "").match(/\d+/)?.[0] || "0",
-        10,
-      );
-      const numB = parseInt(
-        String(b.cardNumber || "").match(/\d+/)?.[0] || "0",
-        10,
-      );
+      const cleanA = String(a.cardNumber || "").replace(/★$/, "");
+      const cleanB = String(b.cardNumber || "").replace(/★$/, "");
+      const numA = parseInt(cleanA.match(/\d+/)?.[0] || "0", 10);
+      const numB = parseInt(cleanB.match(/\d+/)?.[0] || "0", 10);
 
-      return numA - numB;
+      if (numA !== numB) return numA - numB;
+      if (cleanA !== cleanB) return cleanA.localeCompare(cleanB, "ja");
+      return Boolean(a.isParallel) - Boolean(b.isParallel);
     });
 
     cardGrid.innerHTML = "";
@@ -420,6 +436,36 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
   // 検索・フィルター
   searchInput.addEventListener("input", renderCards);
   rarityFilter.addEventListener("change", renderCards);
+  parallelOnlyFilter?.addEventListener("change", renderCards);
+
+  // 「所持のみ」と「未所持のみ」は同時選択できないようにする
+  ownedOnlyFilter?.addEventListener("change", () => {
+    if (ownedOnlyFilter.checked && unownedOnlyFilter) {
+      unownedOnlyFilter.checked = false;
+    }
+    renderCards();
+  });
+
+  unownedOnlyFilter?.addEventListener("change", () => {
+    if (unownedOnlyFilter.checked && ownedOnlyFilter) {
+      ownedOnlyFilter.checked = false;
+    }
+    renderCards();
+  });
+
+  // 検索条件をまとめて初期状態に戻す
+  resetCardFilters?.addEventListener("click", () => {
+    searchInput.value = "";
+    rarityFilter.value = "";
+    typeFilter.value = "";
+    categoryFilter.value = "";
+    brandFilter.value = "";
+    parallelOnlyFilter.checked = false;
+    ownedOnlyFilter.checked = false;
+    unownedOnlyFilter.checked = false;
+    renderCards();
+  });
+
   typeFilter.addEventListener("change", renderCards);
   categoryFilter.addEventListener("change", renderCards);
   brandFilter.addEventListener("change", renderCards);

@@ -4,6 +4,7 @@ let shops = [];
 let mode = "favorite"; // favorite | location
 let locationCoords = null;
 let radiusKm = 10;
+let shopSearchQuery = "";
 let shopMap = null;
 let shopMarkers = [];
 let locationMarker = null;
@@ -48,8 +49,13 @@ export async function initShop() {
   const favoriteButton = document.getElementById("shop-favorite-button");
   const locationButton = document.getElementById("shop-location-button");
   const radius = document.getElementById("shop-radius");
+  const searchInput = document.getElementById("shop-search");
   favoriteButton.addEventListener("click", showFavorites);
   locationButton.addEventListener("click", useCurrentLocation);
+  searchInput.addEventListener("input", () => {
+    shopSearchQuery = normalizeSearchText(searchInput.value);
+    renderShops();
+  });
   radius.addEventListener("change", () => {
     radiusKm = Number(radius.value) || 10;
     if (mode === "location") renderShops();
@@ -130,6 +136,23 @@ function updateMap(list) {
   else if (mode === "favorite") shopMap.setView([35.681236, 139.767125], 6);
 }
 
+function normalizeSearchText(value) {
+  return String(value ?? "")
+    .normalize("NFKC")
+    .toLocaleLowerCase("ja-JP")
+    .replace(/\s+/g, "")
+    .trim();
+}
+
+function matchesShopSearch(shop) {
+  if (!shopSearchQuery) return true;
+
+  const target = normalizeSearchText(
+    [shop.name, shop.prefecture, shop.address, shop.phone].filter(Boolean).join(" "),
+  );
+  return target.includes(shopSearchQuery);
+}
+
 function renderShops() {
   const root = document.getElementById("shop-list");
   const status = document.getElementById("shop-status");
@@ -142,27 +165,40 @@ function renderShops() {
 
   let list;
   if (mode === "favorite") {
-    list = shops.filter((s) => userData(s.name).favorite);
-    status.textContent = list.length
-      ? `お気に入り ${list.length}店舗`
-      : "お気に入り店舗はまだありません";
+    list = shops.filter(
+      (s) => userData(s.name).favorite && matchesShopSearch(s),
+    );
+    status.textContent = shopSearchQuery
+      ? `お気に入り・「${shopSearchQuery}」で ${list.length}店舗`
+      : list.length
+        ? `お気に入り ${list.length}店舗`
+        : "お気に入り店舗はまだありません";
   } else {
     list = shops
       .filter((s) => {
         const d = distance(s);
-        return Number.isFinite(d) && d <= radiusKm;
+        return (
+          Number.isFinite(d) &&
+          d <= radiusKm &&
+          matchesShopSearch(s)
+        );
       })
       .sort((a, b) => distance(a) - distance(b));
-    status.textContent = locationCoords
-      ? `現在地から ${radiusKm}km以内・${list.length}店舗`
-      : "現在地を取得しています…";
+    status.textContent = shopSearchQuery
+      ? locationCoords
+        ? `現在地から ${radiusKm}km以内・「${shopSearchQuery}」で ${list.length}店舗`
+        : "現在地を取得しています…"
+      : locationCoords
+        ? `現在地から ${radiusKm}km以内・${list.length}店舗`
+        : "現在地を取得しています…";
   }
 
   updateMap(list);
   root.innerHTML = "";
   if (!list.length) {
-    root.innerHTML =
-      mode === "favorite"
+    root.innerHTML = shopSearchQuery
+      ? `<div class="shop-empty"><p>🔎 「${esc(shopSearchQuery)}」に一致する店舗がありません</p><p>店舗名や住所の一部で検索してみてね。</p></div>`
+      : mode === "favorite"
         ? '<div class="shop-empty"><p>🎀 お気に入り店舗がありません</p><p>「📍 現在地から探す」から店舗を探して、お気に入りに登録してね。</p></div>'
         : '<div class="shop-empty"><p>この範囲に店舗がありません</p><p>検索範囲を広げてみてね。</p></div>';
     return;

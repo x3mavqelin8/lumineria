@@ -22,7 +22,11 @@ function text(value) {
 }
 
 function normalizeCardNumber(value) {
-  return text(value).replace(/_[A-Z]+$/, "");
+  return text(value).replace(/★$/, "").replace(/_[A-Z]+$/, "");
+}
+
+function isParallelCardNumber(value) {
+  return text(value).endsWith("★");
 }
 
 function isBlank(value) {
@@ -116,12 +120,14 @@ for (const row of rows) {
   }
 
   const candidates = cardsByNumber.get(number) || [];
+  const isParallel = isParallelCardNumber(cardNumber);
 
   let target;
 
-  if (candidates.length === 1) {
-    target = candidates[0];
-  } else if (candidates.length > 1) {
+  // 通常／パラレルをカード番号の★で明確に判定
+  target = candidates.find((card) => Boolean(card.isParallel) === isParallel);
+
+  if (!target && candidates.length > 1) {
     target = candidates.find((card) => {
       return (
         (rarityCode && card.rarityCode === rarityCode) ||
@@ -146,7 +152,7 @@ for (const row of rows) {
       id: cardNumber,
       cardNumber,
       cardType: getCardType(series),
-      isParallel: false,
+      isParallel,
       rarityCode: rarityCode || "",
       rarity: excelRarity,
       name: text(row["カード名"]),
