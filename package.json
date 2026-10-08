@@ -2,10 +2,11 @@
   "type": "module",
   "scripts": {
     "update": "node tools/update.js",
-    "extract": "node tools/extractCards.js",
-    "geocode": "node tools/geocodeShops.js"
+    "geocode": "node tools/geocodeShops.js",
+    "update:shops": "node tools/updateShops.js"
   },
   "dependencies": {
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "pdf-parse": "^2.4.5"
   }
 }
