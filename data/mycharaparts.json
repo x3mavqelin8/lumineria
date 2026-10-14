@@ -1,0 +1,338 @@
+[
+  {
+    "id": 1,
+    "category": "めのいろ",
+    "name": "グレーオングレー",
+    "condition": "期間限定イベント：メエちゃんとアイカツ！／1曲目「アイドル活動！」をクリア",
+    "image": "images/mycharaparts/01_グレーオングレー.webp"
+  },
+  {
+    "id": 2,
+    "category": "めのいろ",
+    "name": "エメラルドブラック",
+    "condition": "期間限定イベント：パリンちゃんとアイカツ！／1曲目「アイドル活動！」をクリア",
+    "image": "images/mycharaparts/02_エメラルドブラック.webp"
+  },
+  {
+    "id": 3,
+    "category": "めのいろ",
+    "name": "ミッドナイトピンク",
+    "condition": "期間限定イベント：たいむちゃんとアイカツ！／1曲目「アイドル活動！」をクリア",
+    "image": "images/mycharaparts/03_ミッドナイトピンク.webp"
+  },
+  {
+    "id": 4,
+    "category": "めのいろ",
+    "name": "キラッキラレッド",
+    "condition": "キュートレベル5達成",
+    "image": "images/mycharaparts/04_キラッキラレッド.webp"
+  },
+  {
+    "id": 5,
+    "category": "めのいろ",
+    "name": "ピンクグラス",
+    "condition": "キュートレベル25達成",
+    "image": "images/mycharaparts/05_ピンクグラス.webp"
+  },
+  {
+    "id": 6,
+    "category": "めのいろ",
+    "name": "ラブラブグリーン",
+    "condition": "キュートレベル35達成",
+    "image": "images/mycharaparts/06_ラブラブグリーン.webp"
+  },
+  {
+    "id": 7,
+    "category": "めのいろ",
+    "name": "ネオンイエロー",
+    "condition": "クールレベル10達成",
+    "image": "images/mycharaparts/07_ネオンイエロー.webp"
+  },
+  {
+    "id": 8,
+    "category": "めのいろ",
+    "name": "ウィンググレー",
+    "condition": "クールレベル30達成",
+    "image": "images/mycharaparts/08_ウィンググレー.webp"
+  },
+  {
+    "id": 9,
+    "category": "めのいろ",
+    "name": "ブルースフィア",
+    "condition": "クールレベル40達成",
+    "image": "images/mycharaparts/09_ブルースフィア.webp"
+  },
+  {
+    "id": 10,
+    "category": "めのいろ",
+    "name": "グレースフィア",
+    "condition": "セクシーレベル2達成",
+    "image": "images/mycharaparts/10_グレースフィア.webp"
+  },
+  {
+    "id": 11,
+    "category": "めのいろ",
+    "name": "ネオンパープル",
+    "condition": "セクシーレベル15達成",
+    "image": "images/mycharaparts/11_ネオンパープル.webp"
+  },
+  {
+    "id": 12,
+    "category": "めのいろ",
+    "name": "ブラックマジック",
+    "condition": "セクシーレベル40達成",
+    "image": "images/mycharaparts/12_ブラックマジック.webp"
+  },
+  {
+    "id": 13,
+    "category": "めのいろ",
+    "name": "キューブオレンジ",
+    "condition": "ポップレベル5達成",
+    "image": "images/mycharaparts/13_キューブオレンジ.webp"
+  },
+  {
+    "id": 14,
+    "category": "めのいろ",
+    "name": "ラブラブライム",
+    "condition": "ポップレベル20達成",
+    "image": "images/mycharaparts/14_ラブラブライム.webp"
+  },
+  {
+    "id": 15,
+    "category": "めのいろ",
+    "name": "ブルーキャット",
+    "condition": "ポップレベル30達成",
+    "image": "images/mycharaparts/15_ブルーキャット.webp"
+  },
+  {
+    "id": 16,
+    "category": "かみのいろ",
+    "name": "ハニーブラウン",
+    "condition": "期間限定イベント：パリンちゃんとアイカツ！／2曲目「MY STARWAY」をクリア",
+    "image": "images/mycharaparts/16_ハニーブラウン.webp"
+  },
+  {
+    "id": 17,
+    "category": "かみのいろ",
+    "name": "ストロベリーピンク",
+    "condition": "期間限定イベント：たいむちゃんとアイカツ！／2曲目「Move on now！」をクリア",
+    "image": "images/mycharaparts/17_ストロベリーピンク.webp"
+  },
+  {
+    "id": 18,
+    "category": "かみのいろ",
+    "name": "パールブルー",
+    "condition": "期間限定イベント：メエちゃんとアイカツ！／2曲目「Prism Spiral」をクリア",
+    "image": "images/mycharaparts/18_パールブルー.webp"
+  },
+  {
+    "id": 19,
+    "category": "かみのいろ",
+    "name": "マロンオレンジ",
+    "condition": "キュートレベル10達成",
+    "image": "images/mycharaparts/19_マロンオレンジ.webp"
+  },
+  {
+    "id": 20,
+    "category": "かみのいろ",
+    "name": "ミルキーローズ",
+    "condition": "キュートレベル20達成",
+    "image": "images/mycharaparts/20_ミルキーローズ.webp"
+  },
+  {
+    "id": 21,
+    "category": "かみのいろ",
+    "name": "ミルクティーベージュ",
+    "condition": "キュートレベル30達成",
+    "image": "images/mycharaparts/21_ミルクティーベージュ.webp"
+  },
+  {
+    "id": 22,
+    "category": "かみのいろ",
+    "name": "パステルブルー",
+    "condition": "クールレベル2達成",
+    "image": "images/mycharaparts/22_パステルブルー.webp"
+  },
+  {
+    "id": 23,
+    "category": "かみのいろ",
+    "name": "きなりホワイト",
+    "condition": "クールレベル15達成",
+    "image": "images/mycharaparts/23_きなりホワイト.webp"
+  },
+  {
+    "id": 24,
+    "category": "かみのいろ",
+    "name": "ラムネブルー",
+    "condition": "クールレベル20達成",
+    "image": "images/mycharaparts/24_ラムネブルー.webp"
+  },
+  {
+    "id": 25,
+    "category": "かみのいろ",
+    "name": "キャンディベリー",
+    "condition": "セクシーレベル5達成",
+    "image": "images/mycharaparts/25_キャンディベリー.webp"
+  },
+  {
+    "id": 26,
+    "category": "かみのいろ",
+    "name": "ピュアパープル",
+    "condition": "セクシーレベル25達成",
+    "image": "images/mycharaparts/26_ピュアパープル.webp"
+  },
+  {
+    "id": 27,
+    "category": "かみのいろ",
+    "name": "グレイテストブラック",
+    "condition": "セクシーレベル35達成",
+    "image": "images/mycharaparts/27_グレイテストブラック.webp"
+  },
+  {
+    "id": 28,
+    "category": "かみのいろ",
+    "name": "レモンティーイエロー",
+    "condition": "ポップレベル10達成",
+    "image": "images/mycharaparts/28_レモンティーイエロー.webp"
+  },
+  {
+    "id": 29,
+    "category": "かみのいろ",
+    "name": "オリーブアッシュ",
+    "condition": "ポップレベル25達成",
+    "image": "images/mycharaparts/29_オリーブアッシュ.webp"
+  },
+  {
+    "id": 30,
+    "category": "かみのいろ",
+    "name": "キャラメルオレンジ",
+    "condition": "ポップレベル40達成",
+    "image": "images/mycharaparts/30_キャラメルオレンジ.webp"
+  },
+  {
+    "id": 31,
+    "category": "かみがた",
+    "name": "サイドおだんごヘア",
+    "condition": "期間限定イベント：パリンちゃんとアイカツ！／3曲目「満開！エリオント」をクリア",
+    "image": "images/mycharaparts/31_サイドおだんごヘア.webp"
+  },
+  {
+    "id": 32,
+    "category": "かみがた",
+    "name": "ゆるふわロングウェーブ",
+    "condition": "期間限定イベント：たいむちゃんとアイカツ！／3曲目「満開！エリオント」をクリア",
+    "image": "images/mycharaparts/32_ゆるふわロングウェーブ.webp"
+  },
+  {
+    "id": 33,
+    "category": "かみがた",
+    "name": "ふんわりショート",
+    "condition": "期間限定イベント：メエちゃんとアイカツ！／3曲目「満開！エリオント」をクリア",
+    "image": "images/mycharaparts/33_ふんわりショート.webp"
+  },
+  {
+    "id": 34,
+    "category": "かみがた",
+    "name": "ナチュラルボブ",
+    "condition": "1弾アイカツ！スタンプ",
+    "image": "images/mycharaparts/34_ナチュラルボブ.webp"
+  },
+  {
+    "id": 35,
+    "category": "かみがた",
+    "name": "ふんわりミディ",
+    "condition": "1弾アイカツ！スタンプ",
+    "image": "images/mycharaparts/35_ふんわりミディ.webp"
+  },
+  {
+    "id": 36,
+    "category": "かみがた",
+    "name": "ピュアショート",
+    "condition": "1弾アイカツ！スタンプ",
+    "image": "images/mycharaparts/36_ピュアショート.webp"
+  },
+  {
+    "id": 37,
+    "category": "かみがた",
+    "name": "スリムツインテール",
+    "condition": "キュートレベル2達成",
+    "image": "images/mycharaparts/37_スリムツインテール.webp"
+  },
+  {
+    "id": 38,
+    "category": "かみがた",
+    "name": "カールミディアムメッシュ",
+    "condition": "キュートレベル15達成",
+    "image": "images/mycharaparts/38_カールミディアムメッシュ.webp"
+  },
+  {
+    "id": 39,
+    "category": "かみがた",
+    "name": "ゆるまきポニーテール",
+    "condition": "キュートレベル40達成",
+    "image": "images/mycharaparts/39_ゆるまきポニーテール.webp"
+  },
+  {
+    "id": 40,
+    "category": "かみがた",
+    "name": "ピュアショートメッシュ",
+    "condition": "クールレベル5達成",
+    "image": "images/mycharaparts/40_ピュアショートメッシュ.webp"
+  },
+  {
+    "id": 41,
+    "category": "かみがた",
+    "name": "おだんごヘア",
+    "condition": "クールレベル25達成",
+    "image": "images/mycharaparts/41_おだんごヘア.webp"
+  },
+  {
+    "id": 42,
+    "category": "かみがた",
+    "name": "ロングサイドテール",
+    "condition": "クールレベル35達成",
+    "image": "images/mycharaparts/42_ロングサイドテール.webp"
+  },
+  {
+    "id": 43,
+    "category": "かみがた",
+    "name": "ナチュラルロングツートン",
+    "condition": "セクシーレベル10達成",
+    "image": "images/mycharaparts/43_ナチュラルロングツートン.webp"
+  },
+  {
+    "id": 44,
+    "category": "かみがた",
+    "name": "フェミニンショート",
+    "condition": "セクシーレベル20達成",
+    "image": "images/mycharaparts/44_フェミニンショート.webp"
+  },
+  {
+    "id": 45,
+    "category": "かみがた",
+    "name": "そとまきロングヘア",
+    "condition": "セクシーレベル30達成",
+    "image": "images/mycharaparts/45_そとまきロングヘア.webp"
+  },
+  {
+    "id": 46,
+    "category": "かみがた",
+    "name": "くるりんパーマショート",
+    "condition": "ポップレベル2達成",
+    "image": "images/mycharaparts/46_くるりんパーマショート.webp"
+  },
+  {
+    "id": 47,
+    "category": "かみがた",
+    "name": "ネコみみボブ",
+    "condition": "ポップレベル15達成",
+    "image": "images/mycharaparts/47_ネコみみボブ.webp"
+  },
+  {
+    "id": 48,
+    "category": "かみがた",
+    "name": "ぱっつんツインテールメッシュ",
+    "condition": "ポップレベル35達成",
+    "image": "images/mycharaparts/48_ぱっつんツインテールメッシュ.webp"
+  }
+]

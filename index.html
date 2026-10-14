@@ -72,6 +72,10 @@
         <button type="button" id="shop-tab" class="view-tab">
           <img src="icons/tab-shop.png" alt="お店" />
         </button>
+ 
+        <button type="button" id="mycharaparts-tab" class="view-tab" aria-label="マイキャラパーツ">
+          <img src="icons/tab-mychar.png" alt="マイキャラ" />
+        </button>
 
         <button type="button" id="settings-tab" class="view-tab">
           <img src="icons/tab-settings.png" alt="設定" />
@@ -149,6 +153,36 @@
 
       <section class="card-grid" id="card-grid">
         <p class="empty-message">カードを読み込み中…</p>
+      </section>
+
+      <!-- マイキャラパーツ画面 -->
+      <section id="mycharaparts-view" class="mycharaparts-view" hidden>
+        <div class="mycharaparts-heading">
+          <h2>🎀 マイキャラパーツ</h2>
+          <p>ゲットしたパーツをチェックしてね ♡</p>
+        </div>
+        <div class="mycharaparts-progress">
+          <span id="mycharaparts-count">GET 0 / 48</span>
+          <span id="mycharaparts-rate">コンプリート率 0%</span>
+          <div class="mycharaparts-progress-track"><span id="mycharaparts-progress-bar"></span></div>
+        </div>
+        <nav class="mycharaparts-mode-tabs" aria-label="表示方法">
+          <button type="button" class="mycharaparts-mode-tab active" data-parts-mode="parts" aria-pressed="true">❤ パーツ別 ❤</button>
+          <button type="button" class="mycharaparts-mode-tab" data-parts-mode="type" aria-pressed="false">❤ タイプ別 ❤</button>
+        </nav>
+        <nav class="mycharaparts-category-tabs" aria-label="パーツカテゴリ">
+          <button type="button" class="mycharaparts-category-tab active" data-part-category="めのいろ">目の色</button>
+          <button type="button" class="mycharaparts-category-tab" data-part-category="かみのいろ">髪色</button>
+          <button type="button" class="mycharaparts-category-tab" data-part-category="かみがた">髪型</button>
+        </nav>
+        <nav class="mycharaparts-type-tabs" aria-label="タイプ別条件" hidden>
+          <button type="button" class="mycharaparts-type-tab active" data-part-type="キュート" aria-pressed="true">キュート</button>
+          <button type="button" class="mycharaparts-type-tab" data-part-type="クール" aria-pressed="false">クール</button>
+          <button type="button" class="mycharaparts-type-tab" data-part-type="セクシー" aria-pressed="false">セクシー</button>
+          <button type="button" class="mycharaparts-type-tab" data-part-type="ポップ" aria-pressed="false">ポップ</button>
+          <button type="button" class="mycharaparts-type-tab" data-part-type="その他" aria-pressed="false">他条件</button>
+        </nav>
+        <div id="mycharaparts-list" class="mycharaparts-list"></div>
       </section>
 
       <!-- トレード画面 -->
@@ -345,7 +379,7 @@
       <section class="settings-section">
         <h3>バックアップ</h3>
         <p>
-          所持枚数・カード詳細・トレード設定・お気に入り店舗・台数を保存します。
+          所持枚数・カード詳細・トレード設定・お気に入り店舗・台数・マイキャラパーツの取得状況を保存します。
         </p>
 
         <button type="button" id="backup-button">♡ バックアップを保存</button>
@@ -364,7 +398,7 @@
       <section class="settings-section">
         <h3>データの初期化</h3>
         <p>
-          所持枚数・カード詳細・トレード設定・お気に入り店舗・台数を削除します。
+          所持枚数・カード詳細・トレード設定・お気に入り店舗・台数・マイキャラパーツの取得状況を削除します。
           カード一覧や画像データは削除されません。
         </p>
 

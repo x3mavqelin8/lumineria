@@ -2110,3 +2110,88 @@ header {
     gap: 10px;
   }
 }
+
+
+/* ==============================
+   マイキャラパーツ図鑑
+============================== */
+.mycharaparts-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 48px;
+  color: #a85c83;
+  border-radius: 12px;
+  font-family: inherit;
+}
+.mycharaparts-tab span { font-size: 24px; line-height: 1; }
+.mycharaparts-tab small { font-size: 10px; font-weight: bold; }
+.mycharaparts-tab.active { background: #fce3ef; box-shadow: inset 0 0 0 1px #e9a8c7; }
+.mycharaparts-view { width: 100%; }
+.mycharaparts-heading { text-align: center; margin: 0 0 18px; }
+.mycharaparts-heading h2 { margin: 0; color: #d66d9e; font-size: 22px; }
+.mycharaparts-heading p { margin: 7px 0 0; color: #9b788b; font-size: 13px; }
+.mycharaparts-progress {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  margin-bottom: 16px; padding: 14px; border: 1px solid #f3d5e3;
+  border-radius: 14px; background: #fff;
+  color: #b95d8a; font-size: 13px; font-weight: bold;
+}
+#mycharaparts-rate { text-align: right; }
+.mycharaparts-progress-track { grid-column: 1 / -1; height: 8px; overflow: hidden; background: #f8e6ef; border-radius: 999px; }
+#mycharaparts-progress-bar { display: block; width: 0; height: 100%; background: #e879ad; border-radius: inherit; transition: width .2s ease; }
+.mycharaparts-mode-tabs { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; margin-bottom: 12px; }
+.mycharaparts-mode-tab {
+  padding: 12px 8px; border: 1px solid #e8c8d8; border-radius: 12px;
+  background: #fff; color: #b95d8a; font: inherit; font-size: 14px; font-weight: bold; cursor: pointer;
+}
+.mycharaparts-mode-tab.active { background: #f6b8d2; color: #fff; border-color: #e99abd; box-shadow: 0 3px 8px #e8b4cc66; }
+.mycharaparts-category-tabs { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; margin-bottom: 16px; }
+.mycharaparts-type-tabs { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 6px; margin-bottom: 16px; }
+.mycharaparts-type-tab {
+  min-width: 0; padding: 10px 3px; border: 1px solid #e8c8d8; border-radius: 10px;
+  background: #fff; color: #9b6682; font: inherit; font-size: 12px; font-weight: bold; cursor: pointer;
+}
+.mycharaparts-type-tab.active { background: #f6b8d2; color: #fff; border-color: #e99abd; box-shadow: 0 3px 8px #e8b4cc66; }
+.mycharaparts-mode-tabs [hidden], .mycharaparts-category-tabs[hidden], .mycharaparts-type-tabs[hidden] { display: none !important; }
+.mycharaparts-category-tab {
+  padding: 12px 5px; border: 1px solid #e8c8d8; border-radius: 12px;
+  background: #fff; color: #9b6682; font: inherit; font-size: 14px; font-weight: bold; cursor: pointer;
+}
+.mycharaparts-category-tab.active { background: #f6b8d2; color: #fff; border-color: #e99abd; box-shadow: 0 3px 8px #e8b4cc66; }
+.mycharaparts-list { display: flex; flex-direction: column; gap: 10px; }
+.mycharaparts-item {
+  display: grid; grid-template-columns: 76px minmax(0,1fr) 34px; align-items: center; gap: 12px;
+  padding: 10px; border: 1px solid #f0dce6; border-radius: 14px; background: #fff;
+}
+.mycharaparts-image {
+  display: block; width: 76px; height: 76px; object-fit: contain;
+  border-radius: 10px; background: #fff7fb; border: 1px solid #f5e5ed;
+}
+.mycharaparts-item.is-owned .mycharaparts-image { filter: grayscale(1); }
+.mycharaparts-info { min-width: 0; }
+.mycharaparts-name { margin: 0 0 5px; color: #684c5b; font-size: 14px; font-weight: bold; overflow-wrap: anywhere; }
+.mycharaparts-condition { margin: 0; color: #987d8b; font-size: 11px; line-height: 1.55; }
+.mycharaparts-check {
+  width: 30px; height: 30px; margin: 0; appearance: none; -webkit-appearance: none;
+  border: 2px solid #e4b3ca; border-radius: 50%; background: #fff; cursor: pointer;
+  display: grid; place-items: center;
+}
+.mycharaparts-check:checked { background: #bdbdbd; border-color: #bdbdbd; }
+.mycharaparts-check:checked::after { content: "✓"; color: #fff; font-size: 18px; font-weight: bold; }
+.mycharaparts-item.is-owned .mycharaparts-name { color: #999; }
+@media (max-width: 480px) {
+  .view-tabs { gap: 5px; }
+  .mycharaparts-tab span { font-size: 21px; }
+  .mycharaparts-tab small { font-size: 9px; }
+  .mycharaparts-item { grid-template-columns: 66px minmax(0,1fr) 30px; gap: 9px; padding: 8px; }
+  .mycharaparts-image { width: 66px; height: 66px; }
+  .mycharaparts-name { font-size: 13px; }
+  .mycharaparts-condition { font-size: 10px; }
+  .mycharaparts-progress { font-size: 12px; }
+  .mycharaparts-mode-tab { font-size: 13px; padding: 11px 4px; }
+  .mycharaparts-type-tabs { gap: 4px; }
+  .mycharaparts-type-tab { font-size: 11px; padding: 10px 1px; }
+}

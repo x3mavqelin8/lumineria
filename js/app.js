@@ -21,6 +21,8 @@ const collectionTab = document.getElementById("collection-tab");
 const tradeTab = document.getElementById("trade-tab");
 
 const shopTab = document.getElementById("shop-tab");
+const mycharapartsTab = document.getElementById("mycharaparts-tab");
+const mycharapartsView = document.getElementById("mycharaparts-view");
 const shopView = document.getElementById("shop-view");
 const settingsTab = document.getElementById("settings-tab");
 const settingsView = document.getElementById("settings-view");
@@ -62,6 +64,168 @@ const { renderCards, renderSummary } = initCardList({
     renderSummary();
   },
 });
+
+// ==============================
+// マイキャラパーツ図鑑
+// ==============================
+const MYCHARAPARTS_STORAGE_KEY = "aikatsu-mycharaparts";
+const mycharapartsList = document.getElementById("mycharaparts-list");
+const mycharapartsCount = document.getElementById("mycharaparts-count");
+const mycharapartsRate = document.getElementById("mycharaparts-rate");
+const mycharapartsProgressBar = document.getElementById("mycharaparts-progress-bar");
+const mycharapartsCategoryTabs = document.querySelectorAll(".mycharaparts-category-tab");
+const mycharapartsModeTabs = document.querySelectorAll(".mycharaparts-mode-tab");
+const mycharapartsTypeTabs = document.querySelectorAll(".mycharaparts-type-tab");
+const mycharapartsTypeNav = document.querySelector(".mycharaparts-type-tabs");
+let mycharapartsData = [];
+let activeMycharapartsCategory = "めのいろ";
+let activeMycharapartsMode = "parts";
+let activeMycharapartsType = "キュート";
+let ownedMycharaparts = loadOwnedMycharaparts();
+
+function loadOwnedMycharaparts() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(MYCHARAPARTS_STORAGE_KEY) || "{}");
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveOwnedMycharaparts() {
+  localStorage.setItem(MYCHARAPARTS_STORAGE_KEY, JSON.stringify(ownedMycharaparts));
+}
+
+function getMycharapartsType(part) {
+  const condition = String(part.condition || "");
+  for (const type of ["キュート", "クール", "セクシー", "ポップ"]) {
+    if (condition.includes(`${type}レベル`)) return type;
+  }
+  return "その他";
+}
+
+function updateMycharapartsProgress() {
+  const total = mycharapartsData.length;
+  const owned = mycharapartsData.filter((part) => Boolean(ownedMycharaparts[String(part.id)])).length;
+  const rate = total ? Math.round((owned / total) * 100) : 0;
+  mycharapartsCount.textContent = `GET ${owned} / ${total}`;
+  mycharapartsRate.textContent = `コンプリート率 ${rate}%`;
+  mycharapartsProgressBar.style.width = `${rate}%`;
+}
+
+function renderMycharaparts() {
+  mycharapartsList.innerHTML = "";
+  const visibleParts = mycharapartsData.filter((part) => {
+    return activeMycharapartsMode === "parts"
+      ? part.category === activeMycharapartsCategory
+      : getMycharapartsType(part) === activeMycharapartsType;
+  });
+
+  // タイプ別では、各タイプのレベル条件を数値の小さい順に並べる。
+  // イベント・スタンプなどレベル条件のない「その他」は元の掲載順を維持する。
+  if (activeMycharapartsMode === "type" && activeMycharapartsType !== "その他") {
+    visibleParts.sort((a, b) => {
+      const getLevel = (part) => {
+        const match = String(part.condition || "").match(/レベル\s*(\d+)/);
+        return match ? Number(match[1]) : Number.MAX_SAFE_INTEGER;
+      };
+      return getLevel(a) - getLevel(b) || Number(a.id) - Number(b.id);
+    });
+  }
+
+  mycharapartsModeTabs.forEach((tab) => {
+    const active = tab.dataset.partsMode === activeMycharapartsMode;
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-pressed", String(active));
+  });
+  mycharapartsCategoryTabs.forEach((tab) => {
+    const active = tab.dataset.partCategory === activeMycharapartsCategory;
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-pressed", String(active));
+  });
+  mycharapartsTypeTabs.forEach((tab) => {
+    const active = tab.dataset.partType === activeMycharapartsType;
+    tab.classList.toggle("active", active);
+    tab.setAttribute("aria-pressed", String(active));
+  });
+  document.querySelector(".mycharaparts-category-tabs").hidden = activeMycharapartsMode !== "parts";
+  mycharapartsTypeNav.hidden = activeMycharapartsMode !== "type";
+
+  if (!visibleParts.length) {
+    mycharapartsList.innerHTML = '<p class="empty-message">この条件のパーツはありません。</p>';
+  }
+
+  visibleParts.forEach((part) => {
+    const isOwned = Boolean(ownedMycharaparts[String(part.id)]);
+    const item = document.createElement("article");
+    item.className = `mycharaparts-item${isOwned ? " is-owned" : ""}`;
+
+    const image = document.createElement("img");
+    image.className = "mycharaparts-image";
+    image.src = part.image;
+    image.alt = part.name;
+    image.loading = "lazy";
+
+    const info = document.createElement("div");
+    info.className = "mycharaparts-info";
+    const name = document.createElement("p");
+    name.className = "mycharaparts-name";
+    name.textContent = part.name;
+    const condition = document.createElement("p");
+    condition.className = "mycharaparts-condition";
+    condition.textContent = `解放条件：${part.condition}`;
+    info.append(name, condition);
+
+    const check = document.createElement("input");
+    check.type = "checkbox";
+    check.className = "mycharaparts-check";
+    check.checked = isOwned;
+    check.setAttribute("aria-label", `${part.name}を${isOwned ? "未所持にする" : "解放済みにする"}`);
+    check.addEventListener("change", () => {
+      if (check.checked) ownedMycharaparts[String(part.id)] = true;
+      else delete ownedMycharaparts[String(part.id)];
+      saveOwnedMycharaparts();
+      renderMycharaparts();
+    });
+
+    item.append(image, info, check);
+    mycharapartsList.appendChild(item);
+  });
+
+  updateMycharapartsProgress();
+}
+
+mycharapartsModeTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    activeMycharapartsMode = tab.dataset.partsMode;
+    renderMycharaparts();
+  });
+});
+mycharapartsCategoryTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    activeMycharapartsCategory = tab.dataset.partCategory;
+    renderMycharaparts();
+  });
+});
+mycharapartsTypeTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    activeMycharapartsType = tab.dataset.partType;
+    renderMycharaparts();
+  });
+});
+
+async function loadMycharaparts() {
+  try {
+    const response = await fetch(`data/mycharaparts.json?v=${Date.now()}`, { cache: "no-store" });
+    if (!response.ok) throw new Error("mycharaparts.jsonを読み込めませんでした");
+    mycharapartsData = await response.json();
+    renderMycharaparts();
+  } catch (error) {
+    console.error("マイキャラパーツの読み込みに失敗しました:", error);
+    mycharapartsList.innerHTML = '<p class="empty-message">パーツデータを読み込めませんでした。</p>';
+  }
+}
+loadMycharaparts();
 
 // ==============================
 // トレード画面
@@ -221,6 +385,7 @@ function switchView(view) {
   const isCollectionView = view === "collection";
   const isTradeView = view === "trade";
   const isShopView = view === "shop";
+  const isMycharapartsView = view === "mycharaparts";
   const isSettingsView = view === "settings";
   const isWalletView = view === "wallet";
 
@@ -229,12 +394,14 @@ function switchView(view) {
   cardGrid.hidden = !isCollectionView;
   tradeView.hidden = !isTradeView;
   shopView.hidden = !isShopView;
+  mycharapartsView.hidden = !isMycharapartsView;
   settingsView.hidden = !isSettingsView;
   walletView.hidden = !isWalletView;
 
   collectionTab.classList.toggle("active", isCollectionView);
   tradeTab.classList.toggle("active", isTradeView);
   shopTab.classList.toggle("active", isShopView);
+  mycharapartsTab.classList.toggle("active", isMycharapartsView);
   settingsTab.classList.toggle("active", isSettingsView);
 
   collectionTab.querySelector("img").src = isCollectionView
@@ -248,6 +415,10 @@ function switchView(view) {
   shopTab.querySelector("img").src = isShopView
     ? "icons/tab-shop-active.png"
     : "icons/tab-shop.png";
+
+  mycharapartsTab.querySelector("img").src = isMycharapartsView
+    ? "icons/tab-mychar-active.png"
+    : "icons/tab-mychar.png";
 
   settingsTab.querySelector("img").src = isSettingsView
     ? "icons/tab-settings-active.png"
@@ -277,6 +448,10 @@ tradeTab.addEventListener("click", () => {
 
 shopTab.addEventListener("click", () => {
   switchView("shop");
+});
+
+mycharapartsTab.addEventListener("click", () => {
+  switchView("mycharaparts");
 });
 
 settingsTab.addEventListener("click", () => {
@@ -877,6 +1052,7 @@ backupButton.addEventListener("click", () => {
       [TRADE_STORAGE_KEY]: localStorage.getItem(TRADE_STORAGE_KEY),
       [getShopStorageKey()]: localStorage.getItem(getShopStorageKey()),
       [WALLET_STORAGE_KEY]: localStorage.getItem(WALLET_STORAGE_KEY),
+      [MYCHARAPARTS_STORAGE_KEY]: localStorage.getItem(MYCHARAPARTS_STORAGE_KEY),
     },
   };
 
@@ -929,6 +1105,7 @@ restoreButton.addEventListener("click", async () => {
       TRADE_STORAGE_KEY,
       getShopStorageKey(),
       WALLET_STORAGE_KEY,
+      MYCHARAPARTS_STORAGE_KEY,
     ];
 
     for (const key of keys) {
@@ -957,6 +1134,8 @@ restoreButton.addEventListener("click", async () => {
     }
 
     await loadCards();
+    ownedMycharaparts = loadOwnedMycharaparts();
+    await loadMycharaparts();
 
     restoreFile.value = "";
     alert("データを復元しました！");
@@ -979,6 +1158,9 @@ resetButton.addEventListener("click", async () => {
   localStorage.removeItem(DETAIL_STORAGE_KEY);
   localStorage.removeItem(TRADE_STORAGE_KEY);
   localStorage.removeItem(getShopStorageKey());
+  localStorage.removeItem(MYCHARAPARTS_STORAGE_KEY);
+  ownedMycharaparts = {};
+  await loadMycharaparts();
 
   await loadCards();
 
