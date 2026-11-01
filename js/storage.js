@@ -111,6 +111,63 @@ export function saveTradeData(tradeData) {
   localStorage.setItem(TRADE_STORAGE_KEY, JSON.stringify(tradeData));
 }
 
+
+// 所持枚数に合わせて譲渡可能枚数を同期する
+// 旧データで譲渡枚数が設定済みのものは、手動設定として引き継ぐ
+export function syncTradeOutCounts(cards) {
+  const tradeData = loadTradeData();
+  let changed = false;
+
+  cards.forEach((card) => {
+    const ownedCount = Math.max(0, Math.floor(Number(card.ownedCount) || 0));
+    const maxOutCount = Math.max(0, ownedCount - 1);
+    const current = tradeData[card.id] || {};
+
+    const hasManualFlag = Object.prototype.hasOwnProperty.call(
+      current,
+      "outCountManual",
+    );
+    const isManual = hasManualFlag
+      ? current.outCountManual === true
+      : Number(current.outCount) > 0;
+
+    const previousOutCount = Math.max(
+      0,
+      Math.floor(Number(current.outCount) || 0),
+    );
+    const outCount = isManual
+      ? Math.min(previousOutCount, maxOutCount)
+      : maxOutCount;
+
+    const wantedCount = Math.max(
+      0,
+      Math.floor(Number(current.wantedCount) || 0),
+    );
+
+    if (wantedCount > 0 || outCount > 0 || isManual) {
+      const next = {
+        ...current,
+        wantedCount,
+        outCount,
+        outCountManual: isManual,
+      };
+      if (JSON.stringify(next) !== JSON.stringify(current)) {
+        tradeData[card.id] = next;
+        changed = true;
+      }
+    } else if (tradeData[card.id]) {
+      delete tradeData[card.id];
+      changed = true;
+    }
+  });
+
+  if (changed) {
+    saveTradeData(tradeData);
+  }
+
+  return tradeData;
+}
+
 // カード1枚分のトレード枚数を保存する
 export function saveCardTrade(cardId, wantedCount, outCount) {
   const tradeData = loadTradeData();

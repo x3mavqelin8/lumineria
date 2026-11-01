@@ -2,6 +2,8 @@
 // カード一覧の要素
 // ==============================
 
+import { loadTradeData } from "./storage.js";
+
 const cardGrid = document.getElementById("card-grid");
 const searchInput = document.getElementById("search");
 const rarityFilter = document.getElementById("rarity-filter");
@@ -11,6 +13,8 @@ const brandFilter = document.getElementById("brand-filter");
 const parallelOnlyFilter = document.getElementById("parallel-only-filter");
 const ownedOnlyFilter = document.getElementById("owned-only-filter");
 const unownedOnlyFilter = document.getElementById("unowned-only-filter");
+const wantedOnlyFilter = document.getElementById("wanted-only-filter");
+const tradeOnlyFilter = document.getElementById("trade-only-filter");
 const resetCardFilters = document.getElementById("reset-card-filters");
 
 const seriesFilter = document.getElementById("series-filter");
@@ -70,6 +74,9 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
     const parallelOnly = parallelOnlyFilter?.checked || false;
     const ownedOnly = ownedOnlyFilter?.checked || false;
     const unownedOnly = unownedOnlyFilter?.checked || false;
+    const wantedOnly = wantedOnlyFilter?.checked || false;
+    const tradeOnly = tradeOnlyFilter?.checked || false;
+    const tradeData = loadTradeData();
 
     return cards.filter((card) => {
       const matchesKeyword =
@@ -93,6 +100,13 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
       const isOwned = Number(card.ownedCount) > 0;
       const matchesOwned = !ownedOnly || isOwned;
       const matchesUnowned = !unownedOnly || !isOwned;
+      const cardTrade = tradeData[card.id] || {};
+      const hasWanted = Number(cardTrade.wantedCount) > 0;
+      const hasTrade = Number(cardTrade.outCount) > 0;
+      const matchesTrade =
+        (!wantedOnly && !tradeOnly) ||
+        (wantedOnly && hasWanted) ||
+        (tradeOnly && hasTrade);
 
       return (
         matchesKeyword &&
@@ -103,7 +117,8 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
         matchesSeries &&
         matchesParallel &&
         matchesOwned &&
-        matchesUnowned
+        matchesUnowned &&
+        matchesTrade
       );
     });
   }
@@ -255,6 +270,14 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
       image.classList.toggle("is-owned", nextValue > 0);
 
       onOwnedChange();
+
+      // 所持枚数変更後、同期された譲渡可能枚数を表示に反映
+      const latestTradeData = JSON.parse(
+        localStorage.getItem("aikatsu-encore-trade") || "{}",
+      );
+      const latestTrade = latestTradeData[card.id] || {};
+      outInput.max = String(Math.max(0, nextValue - 1));
+      outInput.value = Number(latestTrade.outCount) || 0;
     }
 
     decrementButton.addEventListener("click", () => {
@@ -301,6 +324,7 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
     outInput.type = "number";
     outInput.min = "0";
     outInput.step = "1";
+    outInput.max = String(Math.max(0, (Number(card.ownedCount) || 0) - 1));
     outInput.value = "0";
     outInput.setAttribute(
       "aria-label",
@@ -322,22 +346,35 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
     wantedCheck.checked = Number(savedTrade.wantedCount) > 0;
     outInput.value = Number(savedTrade.outCount) || 0;
 
-    function updateTradeCount() {
+    function updateTradeCount(manualChange = false) {
       const wantedCount = wantedCheck.checked ? 1 : 0;
-      const outCount = Math.max(0, Math.floor(Number(outInput.value) || 0));
+      const maxOutCount = Math.max(
+        0,
+        (Number(card.ownedCount) || 0) - 1,
+      );
+      const outCount = Math.min(
+        maxOutCount,
+        Math.max(0, Math.floor(Number(outInput.value) || 0)),
+      );
 
+      outInput.max = String(maxOutCount);
       outInput.value = outCount;
 
       const updatedTradeData = JSON.parse(
         localStorage.getItem("aikatsu-encore-trade") || "{}",
       );
+      const currentTrade = updatedTradeData[card.id] || {};
+      const outCountManual =
+        manualChange || currentTrade.outCountManual === true;
 
-      if (wantedCount === 0 && outCount === 0) {
+      if (wantedCount === 0 && outCount === 0 && !outCountManual) {
         delete updatedTradeData[card.id];
       } else {
         updatedTradeData[card.id] = {
+          ...currentTrade,
           wantedCount,
           outCount,
+          outCountManual,
         };
       }
 
@@ -347,8 +384,8 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
       );
     }
 
-    wantedCheck.addEventListener("change", updateTradeCount);
-    outInput.addEventListener("change", updateTradeCount);
+    wantedCheck.addEventListener("change", () => updateTradeCount(false));
+    outInput.addEventListener("change", () => updateTradeCount(true));
 
     // チェック・カード番号・レアリティを横並びにする
     const cardMeta = document.createElement("div");
@@ -437,6 +474,8 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
   searchInput.addEventListener("input", renderCards);
   rarityFilter.addEventListener("change", renderCards);
   parallelOnlyFilter?.addEventListener("change", renderCards);
+  wantedOnlyFilter?.addEventListener("change", renderCards);
+  tradeOnlyFilter?.addEventListener("change", renderCards);
 
   // 「所持のみ」と「未所持のみ」は同時選択できないようにする
   ownedOnlyFilter?.addEventListener("change", () => {
@@ -463,6 +502,8 @@ export function initCardList({ getCards, openCardModal, onOwnedChange }) {
     parallelOnlyFilter.checked = false;
     ownedOnlyFilter.checked = false;
     unownedOnlyFilter.checked = false;
+    wantedOnlyFilter.checked = false;
+    tradeOnlyFilter.checked = false;
     renderCards();
   });
 

@@ -6,6 +6,7 @@ import {
   loadOwnedCounts,
   loadCardDetails,
   loadTradeData,
+  syncTradeOutCounts,
 } from "./storage.js";
 
 import { initCardModal } from "./modal.js";
@@ -61,7 +62,9 @@ const { renderCards, renderSummary } = initCardList({
   openCardModal,
   onOwnedChange: () => {
     saveOwnedCounts(cards);
+    syncTradeOutCounts(cards);
     renderSummary();
+    renderTradeCards();
   },
 });
 
@@ -801,6 +804,7 @@ async function loadCards() {
 
     // 保存済みの所持枚数があれば反映
     loadOwnedCounts(cards);
+    syncTradeOutCounts(cards);
 
     renderSummary();
     renderCards();
