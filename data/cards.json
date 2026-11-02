@@ -2439,5 +2439,24 @@
     "memo": "",
     "series": "プロモーションカード",
     "ap": 350
+  },
+  {
+    "id": "EP-042",
+    "cardNumber": "EP-042",
+    "cardType": "normal",
+    "isParallel": false,
+    "rarityCode": "PR",
+    "rarity": "プレミアムレア",
+    "name": "たまごっちパラダイスカチューシャ",
+    "coordinateName": "",
+    "type": "ポップ",
+    "category": "アクセサリー",
+    "brand": "ノーブランド",
+    "acquisition": "Tamagotchi Paradaise\r\nアイカツフォン アンコール",
+    "ownedCount": 0,
+    "wanted": false,
+    "memo": "",
+    "series": "",
+    "ap": 600
   }
 ]
