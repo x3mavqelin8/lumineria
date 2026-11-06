@@ -237,8 +237,15 @@ loadMycharaparts();
 // トレード対象カードを取得
 function getTradeCards(status) {
   const tradeData = loadTradeData();
+  const selectedRarities = new Set(
+    [...document.querySelectorAll(".trade-rarity-checkbox:checked")].map(
+      (checkbox) => checkbox.value,
+    ),
+  );
 
   return cards.filter((card) => {
+    if (!selectedRarities.has(String(card.rarityCode || ""))) return false;
+
     const trade = tradeData[card.id];
 
     if (!trade) return false;
@@ -382,6 +389,20 @@ function renderTradeCards() {
     exportTradeImage(currentTradeImageType);
   }
 }
+
+// レアリティ絞り込み
+document.querySelectorAll(".trade-rarity-checkbox").forEach((checkbox) => {
+  checkbox.addEventListener("change", () => {
+    renderTradeCards();
+  });
+});
+
+document.getElementById("trade-rarity-all").addEventListener("click", () => {
+  document.querySelectorAll(".trade-rarity-checkbox").forEach((checkbox) => {
+    checkbox.checked = true;
+  });
+  renderTradeCards();
+});
 
 // メイン画面の切り替え
 function switchView(view) {
@@ -1147,6 +1168,51 @@ restoreButton.addEventListener("click", async () => {
     console.error("データの復元に失敗しました:", error);
     alert("復元に失敗しました。バックアップファイルを確認してください。");
   }
+});
+
+// トレード情報の一括整理
+document.getElementById("reset-trade-out-counts").addEventListener("click", () => {
+  if (!confirm("すべてのカードの譲枚数を0にします。求の登録や所持枚数は変更しません。よろしいですか？")) {
+    return;
+  }
+
+  const tradeData = loadTradeData();
+  Object.keys(tradeData).forEach((cardId) => {
+    tradeData[cardId] = {
+      ...tradeData[cardId],
+      outCount: 0,
+      // 所持枚数同期で譲枚数が自動復活しないよう、手動設定として0を保持
+      outCountManual: true,
+    };
+    if (!(Number(tradeData[cardId].wantedCount) > 0)) {
+      delete tradeData[cardId];
+    }
+  });
+
+  localStorage.setItem(TRADE_STORAGE_KEY, JSON.stringify(tradeData));
+  renderTradeCards();
+  alert("すべての譲枚数をリセットしました！");
+});
+
+document.getElementById("clear-trade-wanted").addEventListener("click", () => {
+  if (!confirm("すべてのカードの求✔️を解除します。譲の登録は変更しません。よろしいですか？")) {
+    return;
+  }
+
+  const tradeData = loadTradeData();
+  Object.keys(tradeData).forEach((cardId) => {
+    tradeData[cardId] = {
+      ...tradeData[cardId],
+      wantedCount: 0,
+    };
+    if (!(Number(tradeData[cardId].outCount) > 0)) {
+      delete tradeData[cardId];
+    }
+  });
+
+  localStorage.setItem(TRADE_STORAGE_KEY, JSON.stringify(tradeData));
+  renderTradeCards();
+  alert("すべての求✔️を解除しました！");
 });
 
 const resetButton = document.getElementById("reset-button");

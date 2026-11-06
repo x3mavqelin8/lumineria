@@ -195,6 +195,17 @@
 
       <!-- トレード画面 -->
       <section id="trade-view" class="trade-view" hidden>
+        <div class="trade-rarity-filter">
+          <p>表示するレアリティ</p>
+          <div class="trade-rarity-options">
+            <label><input type="checkbox" class="trade-rarity-checkbox" value="ER" checked /> ER</label>
+            <label><input type="checkbox" class="trade-rarity-checkbox" value="PR" checked /> PR</label>
+            <label><input type="checkbox" class="trade-rarity-checkbox" value="R" checked /> R</label>
+            <label><input type="checkbox" class="trade-rarity-checkbox" value="N" checked /> N</label>
+          </div>
+          <button type="button" id="trade-rarity-all">すべて表示</button>
+        </div>
+
         <div class="trade-export-actions">
           <button type="button" id="export-wanted-image">♡ 求 ♡</button>
 
@@ -384,6 +395,15 @@
 
     <!-- 設定画面 -->
     <section id="settings-view" class="settings-view" hidden>
+      <section class="settings-section">
+        <h3>トレード一括操作</h3>
+        <p>求・譲の登録内容をまとめて整理できます。実行前に確認が表示されます。</p>
+        <div class="trade-bulk-actions">
+          <button type="button" id="reset-trade-out-counts">譲枚数をまとめてリセット</button>
+          <button type="button" id="clear-trade-wanted">求✔️をまとめて外す</button>
+        </div>
+      </section>
+
       <section class="settings-section">
         <h3>バックアップ</h3>
         <p>

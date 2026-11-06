@@ -2195,3 +2195,67 @@ header {
   .mycharaparts-type-tabs { gap: 4px; }
   .mycharaparts-type-tab { font-size: 11px; padding: 10px 1px; }
 }
+
+
+/* トレード画面：レアリティ絞り込み */
+.trade-rarity-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border: 1px solid #f1cddd;
+  border-radius: 14px;
+  background: #fff8fb;
+  color: #9e5a7b;
+  font-size: 13px;
+}
+.trade-rarity-filter > p {
+  margin: 0;
+  font-weight: bold;
+}
+.trade-rarity-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+.trade-rarity-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  cursor: pointer;
+}
+.trade-rarity-options input {
+  accent-color: #d66d9e;
+}
+#trade-rarity-all {
+  margin-left: auto;
+  padding: 5px 12px;
+  border: 1px solid #e7b5ce;
+  border-radius: 999px;
+  background: #fff;
+  color: #a94f7b;
+  font: inherit;
+  cursor: pointer;
+}
+.trade-bulk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+@media (max-width: 480px) {
+  .trade-rarity-filter {
+    align-items: flex-start;
+  }
+  .trade-rarity-filter > p {
+    width: 100%;
+  }
+  #trade-rarity-all {
+    margin-left: 0;
+  }
+  .trade-bulk-actions button {
+    width: 100%;
+  }
+}
